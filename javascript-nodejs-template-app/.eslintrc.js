@@ -22,7 +22,6 @@ module.exports = {
         '.eslintrc.js'
     ],
     'rules': {
-        'strict': ['error', 'global'], // 使用全局形式的 'use strict'
         'indent': [  //强制使用一致的缩进：tab
             'error',
             2,
