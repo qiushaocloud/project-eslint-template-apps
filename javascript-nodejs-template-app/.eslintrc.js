@@ -5,29 +5,24 @@ module.exports = {
         'browser': false,
         'es6': true
     },
-    'parser': '@typescript-eslint/parser',
+    'parser': 'babel-eslint',
     'extends': [
         'eslint:recommended',
-        'plugin:@typescript-eslint/eslint-recommended',
-        'plugin:@typescript-eslint/recommended',
-        'plugin:@typescript-eslint/recommended-requiring-type-checking'
+        'plugin:jsdoc/recommended'
     ],
-    "plugins": ['@typescript-eslint', 'eslint-plugin-tsdoc'],//定义了该eslint文件所依赖的插件
+    "plugins": ['jsdoc'],//定义了该eslint文件所依赖的插件
     'parserOptions': {
-        'project': 'tsconfig.json',
-        'tsconfigRootDir': __dirname,
-        'ecmaVersion': 6
+        "sourceType": 'script', // ‘module’: 允许使用 import/export 语法       script: 表示使用 JavaScript 脚本
+        'ecmaVersion': 11
     },
     'ignorePatterns': [
         'node_modules/',
         'dist/',
         '.vscode/',
-        'build-script-utils/',
-        'build-after-file/',
-        'tsconfig.json',
         '.eslintrc.js'
     ],
     'rules': {
+        'strict': ['error', 'global'], // 使用全局形式的 'use strict'
         'indent': [  //强制使用一致的缩进：tab
             'error',
             2,
@@ -126,12 +121,6 @@ module.exports = {
         'no-duplicate-imports':2, //禁止重复模块导入
         'no-var':2, //要求使用 let 或 const 而不是 var
         'prefer-const':2, //要求使用 const 声明那些声明后不再被修改的变量
-        '@typescript-eslint/consistent-type-definitions': 2, //Consistent with type definition either interface or type
-        '@typescript-eslint/no-unsafe-member-access': 0, //Disallows member access on any typed variables
-        '@typescript-eslint/no-explicit-any': 0, //Disallow usage of the any type
-        '@typescript-eslint/no-unsafe-call': 0, //Disallows calling an any type value
-        '@typescript-eslint/naming-convention': 2, //Enforces naming conventions for everything across a codebase
-        '@typescript-eslint/restrict-plus-operands': 0, //When adding two variables, operands must both be of type number or of type string. (restrict-plus-operands from TSLint)
         "comma-style": [2, "last"], // 逗号风格，换行时在行首还是行尾
         "complexity": [0, 3], //循环复杂度
         "newline-after-var": 0, //变量声明后是否需要空一行

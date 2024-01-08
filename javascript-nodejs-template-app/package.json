@@ -1,0 +1,25 @@
+{
+  "name": "@qiushaocloud/xxxname",
+  "version": "0.0.0",
+  "description": "this is an npm package description",
+  "author": "qiushaocloud",
+  "license": "MIT",
+  "scripts": {
+    "serve": "node --experimental-modules src/main.js",
+    "lint": "npx eslint --fix --ext .js src",
+    "test-lint": "npx eslint --fix --ext .js test",
+    "install-nrm": "npm install -g nrm",
+    "nrm-npm": "nrm use npm",
+    "nrm-taobao": "nrm use taobao"
+  },
+  "dependencies": {
+    "module-alias": "^2.2.3"
+  },
+  "devDependencies": {
+    "@types/core-js": "^2.5.8",
+    "@types/node": "^20.10.7",
+    "babel-eslint": "^10.1.0",
+    "eslint": "7.32.0",
+    "eslint-plugin-jsdoc": "43.0.7"
+  }
+}
