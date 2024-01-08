@@ -5,16 +5,12 @@
         "allowJs": true,
         "checkJs": true,
         "declaration": true,
-        "outDir": "./dist/src",
+        "outDir": "./dist",
         "strict": true,
         "noImplicitAny": true,
         "moduleResolution": "node",
         "baseUrl": "./",
         "paths": {
-            "@logts":["src/log/index"],
-            "@enum/*":["src/enum/*"],
-            "@common/*":["src/common/*"],
-            "@typings-interface/*":["src/typings-interface/*"],
             "@src/*":["src/*"]
         },
         "esModuleInterop": true,
@@ -23,7 +19,8 @@
     },
     "include": [
         "src/**/*",
-        "test/**/*"
+        "test/**/*",
+        "typings/**/*"
     ],
     "exclude": [
         "node_modules",
