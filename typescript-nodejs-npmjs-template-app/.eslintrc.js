@@ -21,12 +21,11 @@ module.exports = {
     'ignorePatterns': [
         'node_modules/',
         'dist/',
-        'dist-dts/',
         '.vscode/',
-        'webpack-result/',
+        'build-script-utils/',
+        'build-after-file/',
         'tsconfig.json',
-        '.eslintrc.js',
-        'webpack.config.js'
+        '.eslintrc.js'
     ],
     'rules': {
         'indent': [  //强制使用一致的缩进：tab

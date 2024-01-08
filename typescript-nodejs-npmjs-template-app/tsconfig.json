@@ -5,7 +5,6 @@
         "allowJs": true,
         "checkJs": true,
         "declaration": true,
-        "declarationDir": "./dist-dts/",
         "outDir": "./dist",
         "strict": true,
         "noImplicitAny": true,
