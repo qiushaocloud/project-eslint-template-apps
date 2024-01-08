@@ -11,6 +11,11 @@
 > * 一个 NodeJS 环境的 typescript webpack 应用模版，NodeJS 版本 14.16.0
 > * [对应 MD 文件: typescript-nodejs-webpack-template-app/README.md](typescript-nodejs-webpack-template-app/README.md)
 
+### typescript-nodejs-npmjs-template-app
+> * 一个 NodeJS 环境的 typescript npmjs 包应用模版，NodeJS 版本 14.16.0，用于发布 npmjs 包
+> * [对应 MD 文件: typescript-nodejs-npmjs-template-app/README.md](typescript-nodejs-npmjs-template-app/README.md)
+
+
 
 #### 参与贡献
 1.  Fork 本仓库

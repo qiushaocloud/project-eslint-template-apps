@@ -1,5 +1,5 @@
-# typescript-nodejs-template-app
-一个 NodeJS 环境的 typescript 应用模版，NodeJS 版本 14.16.0
+# typescript-nodejs-npmjs-template-app
+一个 NodeJS 环境的 typescript npmjs 包应用模版，NodeJS 版本 14.16.0，用于发布 npmjs 包
 
 
 ### 项目源码
