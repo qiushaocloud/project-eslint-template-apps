@@ -1,0 +1,33 @@
+{
+    "compilerOptions": {
+        "target": "ES5",
+        "module": "CommonJS",
+        "sourceMap": false,
+        "lib": [ "dom", "es5", "es2015.promise" ,"es2015", "es2017"],
+        "allowJs": true,
+        "checkJs": true,
+        "declaration": true,
+        "declarationDir": "./dist-dts/",
+        "outDir": "./dist",
+        "strict": true,
+        "noImplicitAny": true,
+        "moduleResolution": "node",
+        "baseUrl": "./",
+        "paths": {
+            "@enum/*":["src/enum/*"],
+            "@src/*":["src/*"]
+        },
+        "esModuleInterop": true,
+        "experimentalDecorators": true,
+        "emitDecoratorMetadata": true
+    },
+    "include": [
+        "src/**/*",
+        "test/**/*",
+        "typings/**/*"
+    ],
+    "exclude": [
+        "node_modules",
+        "dist"
+    ]
+}
