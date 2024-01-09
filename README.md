@@ -27,8 +27,12 @@
 > * 一个 Browser 环境的 typescript npmjs 包 webpack 应用模版，NodeJS 版本 14.16.0，用于发布 npmjs 包
 > * [对应 MD 文件: typescript-browser-npmjs-webpack-template-app/README.md](typescript-browser-npmjs-webpack-template-app/README.md)
 
+### javascript-nodejs-esm-template-app
+> * 一个 NodeJS 环境的 javascript ECMAScript 应用模版，只能使用 import & export，不能使用 require & modules，NodeJS 版本 14.16.0
+> * [对应 MD 文件: javascript-nodejs-esm-template-app/README.md](javascript-nodejs-esm-template-app/README.md)
+
 ### javascript-nodejs-template-app
-> * 一个 NodeJS 环境的 javascript 应用模版，NodeJS 版本 14.16.0
+> * 一个 NodeJS 环境的 javascript CommonJS 应用模版，只能使用 require & modules，不能使用 import & export，NodeJS 版本 14.16.0
 > * [对应 MD 文件: javascript-nodejs-template-app/README.md](javascript-nodejs-template-app/README.md)
 
 
