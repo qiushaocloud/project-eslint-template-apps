@@ -1,5 +1,5 @@
-# javascript-nodejs-template-app
-一个 NodeJS 环境的 javascript CommonJS 应用模版，只能使用 require & modules，不能使用 import & export，NodeJS 版本 14.16.0
+# javascript-nodejs-esm-template-app
+一个 NodeJS 环境的 javascript ECMAScript 应用模版，只能使用 import & export，不能使用 require & modules，NodeJS 版本 14.16.0
 
 
 ### 项目源码
@@ -14,7 +14,9 @@
 
 
 ### 注意事项
-* 别名需要在 custom-module-alias.js aliasPathMap 及 jsconfig.json paths 同时配置
+* 别名必须以 # 开头
+* 别名需要在 package.json imports 及 jsconfig.json paths 同时配置
+* 文件必须是 .mjs
 
 
 #### 开源不易，如果对您有帮助，请您动一动您的小手，给作者点 Star，也请您多多关注分享者「[邱少羽梦](https://www.qiushaocloud.top)」
