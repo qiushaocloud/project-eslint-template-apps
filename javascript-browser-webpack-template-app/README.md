@@ -8,7 +8,7 @@
 
 
 ### 命令集
-* 按照依赖包: `npm install` 或 `yarn install`
+* 安装依赖包: `npm install` 或 `yarn install`
 * eslint 检测: `npm run lint && npm run test-lint`
 * prod webpack 编译: `npm run build`
 * dev webpack 编译: `npm run build-dev`
