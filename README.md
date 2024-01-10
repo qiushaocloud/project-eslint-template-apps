@@ -36,9 +36,9 @@
 > * [对应 MD 文件: javascript-nodejs-template-app/README.md](javascript-nodejs-template-app/README.md)
 
 
-### javascript-browser-webpacl-template-app
+### javascript-browser-webpack-template-app
 > * 一个 Browser 环境的 javascript webpack 应用模版，NodeJS 版本 14.16.0
-> * [对应 MD 文件: javascript-browser-webpacl-template-app/README.md](javascript-browser-webpacl-template-app/README.md)
+> * [对应 MD 文件: javascript-browser-webpack-template-app/README.md](javascript-browser-webpack-template-app/README.md)
 
 
 

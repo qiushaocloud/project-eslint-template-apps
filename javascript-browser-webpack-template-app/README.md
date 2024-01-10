@@ -1,4 +1,4 @@
-# javascript-browser-webpacl-template-app
+# javascript-browser-webpack-template-app
 一个 Browser 环境的 javascript webpack 应用模版，NodeJS 版本 14.16.0
 
 
