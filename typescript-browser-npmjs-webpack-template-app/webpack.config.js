@@ -17,6 +17,7 @@ for(const key in aliasPathMap){
 console.log('formatAlias:', formatAlias);
 
 const readDirAllFileSync = (dirName) => {
+  if (!fs.existsSync(dirName)) return [];
   const fileOrDirArr = fs.readdirSync(dirName);
   const allFileArr = [];
 
@@ -89,6 +90,7 @@ const dtsBundleAfterHandler  = () => {
 
 module.exports = (env, argv) => {
     const nodeEnv = argv.mode || 'production'; //development | production
+    console.log('nodeEnv and env:', nodeEnv, env);
 
     const config = {
       mode: nodeEnv,

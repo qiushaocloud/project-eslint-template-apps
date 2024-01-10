@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "module": "CommonJS",
+    "target": "ES5",
+    "allowSyntheticDefaultImports": false,
+    "baseUrl": "./",
+    "paths": {
+      "@enum/*": ["src/enum/*"],
+      "@src/*": ["src/*"]
+    }
+  },
+  "allowJs": true,
+  "exclude": ["node_modules", "dist"],
+  "include": ["src", "custom-module-alias.js"]
+}
