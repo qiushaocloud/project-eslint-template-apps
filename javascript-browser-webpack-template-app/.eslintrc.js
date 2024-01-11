@@ -18,6 +18,8 @@ module.exports = {
     'ignorePatterns': [
         'node_modules/',
         'dist/',
+        'build-script-utils/',
+        'build-after-file/',
         'webpack-result/',
         '.vscode/',
         'jsconfig.json',
