@@ -27,6 +27,8 @@
             "@styles/*":["src/styles/*"],
             "@pages/*":["src/pages/*"],
             "@routers/*":["src/routers/*"],
+            "@components/*":["src/components/*"],
+            "@containers/*":["src/containers/*"],
             "@src/*":["src/*"]
         },
         "esModuleInterop": true,                    /* 启用 CommonJS 和 ES 模块之间的互操作性。 */
