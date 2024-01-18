@@ -1,0 +1,40 @@
+{
+    "compilerOptions": {
+        "target": "ES5",                            /* 编译后的 JavaScript 代码目标为 ECMAScript 5。 */
+        "module": "ESNext",                         /* 使用 ECMAScript 模块系统，支持最新的模块语法。 */
+        "sourceMap": true,                          /* 生成相应的 '.map' 文件，用于调试。 */
+        "lib": [ "dom", "dom.iterable", "es5", "es2015.promise" ,"es2015", "es2017", "esnext"],  /* 编译时所需的库文件。 */
+        "allowJs": true,                            /* 允许编译 JavaScript 文件。 */
+        "checkJs": true,                            /* 对 JavaScript 文件进行类型检查。 */
+        "jsx": "react",                             /* 指定 JSX 代码生成方式为 'react'。 */
+        "isolatedModules": false,                   /* 将每个文件单独编译成模块，类似 'ts.transpileModule'。 */
+        "resolveJsonModule": true,                  /* 允许 TypeScript 导入 JSON 文件。 */
+        "forceConsistentCasingInFileNames": true,   /* 强制文件名大小写一致性。 */
+        "skipLibCheck": true,                       /* 跳过对声明文件的类型检查。 */
+        "outDir": "./dist",                         /* 重定向输出结构到指定目录，这里设置为 './dist'。 */
+        "strict": true,                             /* 启用所有严格的类型检查选项。 */
+        "noImplicitThis": true,                     /* 在 'this' 表达式中出现隐式 'any' 类型时报错。 */
+        "noImplicitAny": true,                      /* 报告使用隐式 'any' 类型的错误。 */
+        "noImplicitReturns": true,                  /* 在函数中不是所有路径都返回值时报错。 */
+        "moduleResolution": "node",                 /* 指定模块解析策略，这里设置为 'node'。 */
+        "baseUrl": "./",                            /* 用于解析非绝对模块名的基础目录。 */
+        "allowSyntheticDefaultImports": true,       /* 允许从没有默认导出的模块进行默认导入。 */
+        "paths": {                                  /* 模块名的映射，可用于指定模块的别名。 */
+            "@enum/*":["src/enum/*"],
+            "@src/*":["src/*"]
+        },
+        "esModuleInterop": true,                    /* 启用 CommonJS 和 ES 模块之间的互操作性。 */
+        "experimentalDecorators": true,            /* 启用实验性的 ES7 装饰器支持。 */
+        "emitDecoratorMetadata": true               /* 在装饰器上生成元数据，用于反射。 */
+    },
+    "include": [                                     /* 包含在编译中的文件或目录。 */
+        "src/**/*",
+        "test/**/*",
+        "typings/**/*"                             
+    ],
+    "exclude": [                                    /* 排除在编译之外的文件或目录。 */
+        "node_modules",
+        "dist"                                      
+    ]
+}
+  

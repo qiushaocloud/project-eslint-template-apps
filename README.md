@@ -1,5 +1,5 @@
 # project-template-apps
-提供各种项目 ESLint 基础模版应用，主要限定 ESLint 规则、路径别名、webpack 打包等基础项目，例如: typescript-nodejs-template-app、typescript-nodejs-webpack-template-app、typescript-nodejs-npmjs-template-app、typescript-nodejs-npmjs-webpack-template-app、typescript-vue2-template-app、typescript-vue3-template-app、typescript-react-template-app、typescript-browser-npmjs-template-app、typescript-browser-npmjs-webpack-template-app、javascript-nodejs-template-app 等。
+提供各种项目 ESLint 基础模版应用，主要限定 ESLint 规则、路径别名、webpack 打包等基础项目，例如: typescript-nodejs-template-app、typescript-nodejs-webpack-template-app、typescript-nodejs-npmjs-template-app、typescript-nodejs-npmjs-webpack-template-app、vue2-template-app、vue3-template-app、react-template-app、typescript-browser-npmjs-template-app、typescript-browser-npmjs-webpack-template-app、javascript-nodejs-template-app 等。
 
 
 ## 项目模版集
