@@ -3,6 +3,7 @@ const fs = require('fs');
 const WebpackMerge = require("webpack-merge");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const CopyWebpackPlugin = require("copy-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const TerserPlugin = require('terser-webpack-plugin');
 const baseWebpackConfig = require("./webpack.base.config");
@@ -15,14 +16,15 @@ module.exports = WebpackMerge.merge(baseWebpackConfig('production'), {
     mode: "production",
     
     // 指定入口文件，即项目的主文件
-    entry: path.join(__dirname, '../src/main.jsx'),
-    // entry: path.join(__dirname, '../src/main.tsx'),
+    // entry: path.join(__dirname, '../src/main.jsx'),
+    entry: path.join(__dirname, '../src/main.tsx'),
 
     // 输出位置配置
     output: {
         filename: "js/[name].bundle.js", // 输出的主文件名
         path: path.join(__dirname, '../dist'), // 输出的目录
-        chunkFilename: "js/[chunkhash:8].js" // 输出的非主文件（chunk）名，带有 hash
+        chunkFilename: "js/[chunkhash:8].js", // 输出的非主文件（chunk）名，带有 hash
+        // publicPath: './'
     },
     
     // 插件配置
@@ -55,6 +57,10 @@ module.exports = WebpackMerge.merge(baseWebpackConfig('production'), {
             // 设置生成的按需加载（通过 code splitting）的 CSS 文件的文件名
             chunkFilename: `css/[id].css`,
         }),
+
+        new CopyWebpackPlugin({patterns: [
+            {from: "public/favicon.ico",to: ""}
+        ]}),
     ],
 
     // 优化配置

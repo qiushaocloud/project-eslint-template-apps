@@ -10,7 +10,7 @@ const tsconfigJson = JSON.parse(JSON.minify(fs.readFileSync(path.resolve(__dirna
 const aliasPathMap = tsconfigJson.compilerOptions.paths || {};
 const formatAlias = {};
 for(const key in aliasPathMap){
-  formatAlias[key.replace(/\/\*/g, '')] =  path.resolve(__dirname, './'+aliasPathMap[key][0].replace(/\/\*/g, ''));
+  formatAlias[key.replace(/\/\*/g, '')] =  path.resolve(__dirname, '../'+aliasPathMap[key][0].replace(/\/\*/g, ''));
 }
 console.log('formatAlias:', formatAlias);
 
@@ -102,7 +102,7 @@ module.exports = (nodeEnv, opts) => {
             // 使用 webpack5 asset 处理图片文件
             type: 'asset/resource',
             generator: {
-              filename: 'img/[name]_[hash:6][ext]',
+              filename: 'assets/imgs/[name]_[hash:6][ext]',
             },
             // parser: { // 需要 type: 'asset',
             //   dataUrlCondition: {
@@ -116,7 +116,7 @@ module.exports = (nodeEnv, opts) => {
             // 使用 webpack5 asset/resource 处理字体文件
             type: 'asset/resource',
             generator: {
-              filename: 'font/[name]_[hash:6][ext]',
+              filename: 'assets/fonts/[name]_[hash:6][ext]',
             }
           }
         ]
@@ -127,7 +127,7 @@ module.exports = (nodeEnv, opts) => {
         // 配置别名
         alias: formatAlias,
         // 指定文件扩展名，以便在引入模块时可以省略文件扩展名
-        extensions: ['.ts', '.tsx', '.js', '.jsx'],
+        extensions: ['.ts', '.tsx', '.js', '.jsx', '.json'],
       },
       target: 'web',
       // performance 配置用于控制 webpack 在处理资源时输出性能提示的选项。

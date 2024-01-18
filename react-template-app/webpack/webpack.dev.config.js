@@ -3,6 +3,7 @@ const fs = require('fs');
 const WebpackMerge = require("webpack-merge");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const CopyWebpackPlugin = require("copy-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const baseWebpackConfig = require("./webpack.base.config");
 
@@ -12,8 +13,8 @@ console.log('currentTarget:', currentTarget);
 
 let devWebpackConfig = {
     // 指定入口文件，即项目的主文件
-    entry: path.join(__dirname, '../src/main.jsx'),
-    // entry: path.join(__dirname, '../src/main.tsx'),
+    // entry: path.join(__dirname, '../src/main.jsx'),
+    entry: path.join(__dirname, '../src/main.tsx'),
 
     // 指定构建环境为开发环境
     mode: "development",
@@ -71,6 +72,11 @@ if (currentTarget === 'serve') {
             // publicPath: './'
         },
 
+        // 开发环境配置
+        // source-map 是一种独立的文件，它为每个生成的文件创建一个完整的 Sourcemap 文件。这样的 Sourcemap 文件通常以 .map 结尾，与生成的代码文件相对应。
+        // eval-source-map 将 Source Map 作为 Data URL 嵌入到 bundle 中，而不是生成独立的文件。这样会增加构建速度，但可能使 bundle 文件变得较大。
+        devtool: 'source-map',
+
         // 插件配置
         plugins: [
             // 清理输出目录
@@ -97,6 +103,10 @@ if (currentTarget === 'serve') {
                 // 设置生成的按需加载（通过 code splitting）的 CSS 文件的文件名
                 chunkFilename: `css/[id].css`,
             }),
+
+            new CopyWebpackPlugin({patterns: [
+                {from: "public/favicon.ico",to: ""}
+            ]}),
         ],
     });
 }

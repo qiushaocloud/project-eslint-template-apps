@@ -21,6 +21,12 @@
         "allowSyntheticDefaultImports": true,       /* 允许从没有默认导出的模块进行默认导入。 */
         "paths": {                                  /* 模块名的映射，可用于指定模块的别名。 */
             "@enum/*":["src/enum/*"],
+            "@images/*":["src/assets/images/*"],
+            "@fonts/*":["src/assets/fonts/*"],
+            "@assets/*":["src/assets/*"],
+            "@styles/*":["src/styles/*"],
+            "@pages/*":["src/pages/*"],
+            "@routers/*":["src/routers/*"],
             "@src/*":["src/*"]
         },
         "esModuleInterop": true,                    /* 启用 CommonJS 和 ES 模块之间的互操作性。 */
