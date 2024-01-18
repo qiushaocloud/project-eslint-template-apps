@@ -10,8 +10,8 @@
     "build-dev": "webpack --config webpack/webpack.dev.config.js --mode=development",
     "tsnode": "ts-node --files -r tsconfig-paths/register",
     "tsnodedev": "ts-node-dev --files -r tsconfig-paths/register",
-    "lint": "npx eslint --fix --ext .ts src && tsc --project tsconfig.json",
-    "test-lint": "npx eslint --fix --ext .ts test && tsc --project tsconfig.json"
+    "lint": "npx eslint --fix --ext .ts,.tsx src",
+    "test-lint": "npx eslint --fix --ext .ts,.tsx test"
   },
   "dependencies": {
     "react": "^18.2.0",
@@ -34,6 +34,7 @@
     "copy-webpack-plugin": "11.0.0",
     "css-loader": "^6.9.0",
     "eslint": "7.32.0",
+    "eslint-plugin-react": "^7.33.2",
     "eslint-plugin-tsdoc": "^0.2.17",
     "html-webpack-plugin": "^5.6.0",
     "jsonminify": "^0.4.2",

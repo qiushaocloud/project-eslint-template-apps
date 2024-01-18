@@ -74,7 +74,7 @@ module.exports = {
         'no-ex-assign': 2,//禁止给catch语句中的异常参数赋值
         'strict': 2,//使用严格模式
         'use-isnan': 2,//禁止比较时使用NaN，只能用isNaN()
-        'no-use-before-define': 2,//未定义前不能使用
+        'no-use-before-define': 0,//未定义前不能使用
         'no-unused-vars': [2, {'vars': 'all', 'args': 'after-used'}],//不能有声明后未被使用的变量或参数
         'no-useless-call': 2,//禁止不必要的call和apply
         'no-void': 2,//禁用void操作符
@@ -134,6 +134,7 @@ module.exports = {
         '@typescript-eslint/no-unsafe-call': 0, //Disallows calling an any type value
         '@typescript-eslint/naming-convention': 0, //Enforces naming conventions for everything across a codebase
         '@typescript-eslint/restrict-plus-operands': 0, //When adding two variables, operands must both be of type number or of type string. (restrict-plus-operands from TSLint)
+        '@typescript-eslint/no-unsafe-assignment': 0,
         "comma-style": [2, "last"], // 逗号风格，换行时在行首还是行尾
         "complexity": [0, 3], //循环复杂度
         "newline-after-var": 0, //变量声明后是否需要空一行
