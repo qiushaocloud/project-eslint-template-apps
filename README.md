@@ -41,6 +41,11 @@
 > * [对应 MD 文件: javascript-browser-webpack-template-app/README.md](javascript-browser-webpack-template-app/README.md)
 
 
+### react-template-app
+> * 一个 React webpack 应用模版，NodeJS 版本 14.16.0，React 使用 18.2.0，支持 .tsx|.jsx，支持 .less|.scss
+> * [对应 MD 文件: react-template-app/README.md](react-template-app/README.md)
+
+
 
 #### 参与贡献
 1.  Fork 本仓库
