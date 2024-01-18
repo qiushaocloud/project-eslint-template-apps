@@ -20,13 +20,17 @@
         "baseUrl": "./",                            /* 用于解析非绝对模块名的基础目录。 */
         "allowSyntheticDefaultImports": true,       /* 允许从没有默认导出的模块进行默认导入。 */
         "paths": {                                  /* 模块名的映射，可用于指定模块的别名。 */
+            "@default/*":["src/default/*"],
             "@enum/*":["src/enum/*"],
+            "@common/*":["src/common/*"],
+            "@helpers/*":["src/helpers/*"],
             "@images/*":["src/assets/images/*"],
             "@fonts/*":["src/assets/fonts/*"],
             "@assets/*":["src/assets/*"],
             "@styles/*":["src/styles/*"],
             "@pages/*":["src/pages/*"],
             "@routers/*":["src/routers/*"],
+            "@reduxs/*":["src/reduxs/*"],
             "@components/*":["src/components/*"],
             "@containers/*":["src/containers/*"],
             "@src/*":["src/*"]
