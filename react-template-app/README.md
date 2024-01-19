@@ -1,5 +1,5 @@
 # react-template-app
-一个 React webpack 应用模版，NodeJS 版本 14.16.0，React 使用 18.2.0，支持 .tsx|.jsx，支持 .less|.scss
+一个 React webpack 应用模版，NodeJS 版本 14.16.0，React 使用 18.2.0，支持使用 TypeScript，支持 react-router-dom 和 react-redux(@reduxjs/toolkit)，支持 .tsx|.jsx，支持 .less|.scss
 
 
 ### 项目源码

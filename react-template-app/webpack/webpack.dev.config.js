@@ -1,20 +1,22 @@
 const path = require('path');
 const fs = require('fs');
+const webpack = require('webpack');
 const WebpackMerge = require("webpack-merge");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const ESLintWebpackPlugin = require('eslint-webpack-plugin');
 const baseWebpackConfig = require("./webpack.base.config");
 
 const packageJson = JSON.parse(JSON.minify(fs.readFileSync(path.resolve(__dirname, '../package.json'), 'utf8')));
 const currentTarget = process.env.npm_lifecycle_event;
-console.log('currentTarget:', currentTarget);
+console.log('currentTarget:', currentTarget, ' ,process.env.NODE_ENV:', process.env.NODE_ENV);
 
 let devWebpackConfig = {
     // 指定入口文件，即项目的主文件
-    // entry: path.join(__dirname, '../src/main.jsx'),
-    entry: path.join(__dirname, '../src/main.tsx'),
+    // entry: path.join(__dirname, '../src/index.jsx'),
+    entry: path.join(__dirname, '../src/index.tsx'),
 
     // 指定构建环境为开发环境
     mode: "development",
@@ -25,6 +27,16 @@ if (currentTarget === 'serve') {
     Object.assign(devWebpackConfig, {
         // 插件配置
         plugins: [
+            new webpack.DefinePlugin({
+                'process.env.NODE_ENV': '"development"'
+            }),
+
+            new ESLintWebpackPlugin({
+                extensions: ['mjs', 'js', 'jsx', 'ts', 'tsx'],
+                context: path.resolve(__dirname, '../src'),
+                cache: true
+            }),
+
             // 配置输出的 HTML
             new HtmlWebpackPlugin({
                 title: `this is ${packageJson.name}@${packageJson.version} web test demo(development)`,
@@ -79,6 +91,16 @@ if (currentTarget === 'serve') {
 
         // 插件配置
         plugins: [
+            new webpack.DefinePlugin({
+                'process.env.NODE_ENV': '"development"'
+            }),
+
+            new ESLintWebpackPlugin({
+                extensions: ['mjs', 'js', 'jsx', 'ts', 'tsx'],
+                context: path.resolve(__dirname, '../src'),
+                cache: true
+              }),
+
             // 清理输出目录
             new CleanWebpackPlugin(),
 

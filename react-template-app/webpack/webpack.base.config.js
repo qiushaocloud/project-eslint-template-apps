@@ -55,8 +55,8 @@ module.exports = (nodeEnv, opts) => {
       module: {
         rules: [
           {
-            // 匹配以.js、.jsx、.ts或.tsx结尾的文件
-            test: /\.(j|t)sx?$/,
+            // 匹配以.mjs、.js、.jsx、.ts、.tsx结尾的文件
+            test: /\.(mjs|(j|t)sx?)$/,
             use: [
               {
                 // 使用 babel-loader 处理以上文件类型
@@ -127,7 +127,7 @@ module.exports = (nodeEnv, opts) => {
         // 配置别名
         alias: formatAlias,
         // 指定文件扩展名，以便在引入模块时可以省略文件扩展名
-        extensions: ['.ts', '.tsx', '.js', '.jsx', '.json'],
+        extensions: ['.mjs', '.ts', '.tsx', '.js', '.jsx', '.json'],
       },
       target: 'web',
       // performance 配置用于控制 webpack 在处理资源时输出性能提示的选项。

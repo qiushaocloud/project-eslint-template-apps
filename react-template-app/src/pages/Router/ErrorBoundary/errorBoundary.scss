@@ -1,0 +1,17 @@
+.error-boundary-box{
+  position: relative;
+  width: 100%;
+  height: 100%;
+
+  .error-box {
+    background: #000;
+    color: #fff;
+    font-size: 30px;
+    width: 100%;
+    height: 100%;
+  
+    .title {
+      color: #fff;
+    }
+  }
+}

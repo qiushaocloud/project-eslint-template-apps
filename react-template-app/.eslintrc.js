@@ -121,10 +121,11 @@ module.exports = {
         'no-trailing-spaces':2, //禁用行尾空白
         'no-unneeded-ternary':2, //禁止可以在有更简单的可替代的表达式时使用三元操作符
         'no-whitespace-before-property':2, //禁止属性前有空白
-        'arrow-body-style':[ //要求箭头函数体使用大括号
-            'error',
-            'always'
-        ],
+        // 'arrow-body-style':[ //要求箭头函数体使用大括号
+        //     'error',
+        //     'always'
+        // ],
+        'arrow-body-style': 0, //要求箭头函数体使用大括号
         'no-duplicate-imports':2, //禁止重复模块导入
         'no-var':2, //要求使用 let 或 const 而不是 var
         'prefer-const':2, //要求使用 const 声明那些声明后不再被修改的变量

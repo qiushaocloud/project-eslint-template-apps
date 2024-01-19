@@ -6,6 +6,7 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const TerserPlugin = require('terser-webpack-plugin');
+const ESLintWebpackPlugin = require('eslint-webpack-plugin');
 const baseWebpackConfig = require("./webpack.base.config");
 
 const packageJson = JSON.parse(JSON.minify(fs.readFileSync(path.resolve(__dirname, '../package.json'), 'utf8')));
@@ -16,8 +17,8 @@ module.exports = WebpackMerge.merge(baseWebpackConfig('production'), {
     mode: "production",
     
     // 指定入口文件，即项目的主文件
-    // entry: path.join(__dirname, '../src/main.jsx'),
-    entry: path.join(__dirname, '../src/main.tsx'),
+    // entry: path.join(__dirname, '../src/index.jsx'),
+    entry: path.join(__dirname, '../src/index.tsx'),
 
     // 输出位置配置
     output: {
@@ -29,6 +30,12 @@ module.exports = WebpackMerge.merge(baseWebpackConfig('production'), {
     
     // 插件配置
     plugins: [
+        new ESLintWebpackPlugin({
+            extensions: ['mjs', 'js', 'jsx', 'ts', 'tsx'],
+            context: path.resolve(__dirname, '../src'),
+            cache: true
+        }),
+
         // 清理输出目录
         new CleanWebpackPlugin(),
 
