@@ -6,6 +6,7 @@
   "license": "MIT",
   "scripts": {
     "serve": "cross-env NODE_ENV=development webpack-dev-server --config webpack/webpack.dev.config.js --mode=development --open",
+    "serve-noopen": "cross-env NODE_ENV=development webpack-dev-server --config webpack/webpack.dev.config.js --mode=development",
     "build": "cross-env NODE_ENV=production webpack --config webpack/webpack.prod.config.js --mode=production",
     "build-dev": "cross-env NODE_ENV=development webpack --config webpack/webpack.dev.config.js --mode=development",
     "tsnode": "ts-node --files -r tsconfig-paths/register",

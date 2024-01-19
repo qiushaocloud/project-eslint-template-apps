@@ -27,5 +27,6 @@ export type AppDispatch = typeof store.dispatch;
 // 主要解决在每次使用 useSelector 和 useDispatch 都要去重新定义 TS 类型的问题
 export const useAppDispatch: () => AppDispatch = useDispatch;
 export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
+export const storeDispatch: typeof store.dispatch = store.dispatch;
 
 export default store;

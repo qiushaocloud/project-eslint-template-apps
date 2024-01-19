@@ -17,8 +17,28 @@ console.log('formatAlias:', formatAlias);
 // 导出 webpack 配置对象
 module.exports = (nodeEnv, opts) => {
     // nodeEnv: development | production
-    // opts: {useMiniCssExtractPlugin, coverConf}
+    // opts: {useMiniCssExtractPlugin, coverConf, isPx2Rem, px2RemOptions}
     const isDevelopmentEnv = nodeEnv === 'development';
+
+    const getPxToRemArr = () => {
+      if (opts?.isPx2Rem) {
+        return [{
+          // 使用 webpack-px-to-rem-loader 处理 px 转 rem
+          loader: 'webpack-px-to-rem',
+          options: Object.assign({
+            // 1rem=npx，默认为 10
+            basePx: 100,
+            // 只会转换大于min的px，默认为0
+            // 因为很小的px（比如border的1px）转换为rem后在很小的设备上结果会小于1px，有的设备就会不显示
+            min: 1,
+            // 转换后的rem值保留的小数点后位数，默认为3
+            floatWidth: 3
+          }, opts?.px2RemOptions || {}),
+        }];
+      }
+
+      return [];
+    }
 
     const getCssRuleUseArr = () => {
       return [
@@ -34,19 +54,7 @@ module.exports = (nodeEnv, opts) => {
         `css-loader`,
         // 使用 postcss-loader 处理 CSS 文件，用于添加浏览器前缀等
         `postcss-loader`,
-        // {
-        //   // 使用 webpack-px-to-rem-loader 处理 px 转 rem
-        //   loader: 'webpack-px-to-rem',
-        //   options: {
-        //     // 1rem=npx，默认为 10
-        //     basePx: 100,
-        //     // 只会转换大于min的px，默认为0
-        //     // 因为很小的px（比如border的1px）转换为rem后在很小的设备上结果会小于1px，有的设备就会不显示
-        //     min: 1,
-        //     // 转换后的rem值保留的小数点后位数，默认为3
-        //     floatWidth: 3
-        //   },
-        // },
+        ...getPxToRemArr()
       ]
     };
 
@@ -61,7 +69,8 @@ module.exports = (nodeEnv, opts) => {
               {
                 // 使用 babel-loader 处理以上文件类型
                 loader: 'babel-loader',
-              }
+              },
+              ...getPxToRemArr()
             ],
             // 指定需要进行处理的文件目录
             include: [resolve('../src')],

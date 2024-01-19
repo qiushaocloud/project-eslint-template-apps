@@ -13,7 +13,7 @@ const packageJson = JSON.parse(JSON.minify(fs.readFileSync(path.resolve(__dirnam
 const currentTarget = process.env.npm_lifecycle_event;
 console.log('currentTarget:', currentTarget, ' ,process.env.NODE_ENV:', process.env.NODE_ENV);
 
-let devWebpackConfig = {
+const devWebpackConfig = {
     // 指定入口文件，即项目的主文件
     // entry: path.join(__dirname, '../src/index.jsx'),
     entry: path.join(__dirname, '../src/index.tsx'),
@@ -21,7 +21,12 @@ let devWebpackConfig = {
     // 指定构建环境为开发环境
     mode: "development",
 };
-let baseCfgOpts;
+const baseCfgOpts = {
+    // useMiniCssExtractPlugin: false,
+    // coverConf: undefined,
+    isPx2Rem: false,
+    // px2RemOptions: {}
+};
 
 if (currentTarget === 'serve') {
     Object.assign(devWebpackConfig, {
@@ -71,9 +76,7 @@ if (currentTarget === 'serve') {
         }
     });
   } else {
-    baseCfgOpts = {
-        useMiniCssExtractPlugin: true
-    };
+    baseCfgOpts.useMiniCssExtractPlugin = true;
 
     Object.assign(devWebpackConfig, {
         // 输出位置配置

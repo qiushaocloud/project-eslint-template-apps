@@ -1,4 +1,4 @@
-import React, {Component, ReactNode, ErrorInfo} from 'react';
+import React, {Component, ReactNode} from 'react';
 import {formatLog} from '@helpers/format';
 import './errorBoundary.scss';
 
@@ -14,13 +14,13 @@ class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
   constructor (props: ErrorBoundaryProps) {
     super(props);
     this.state = {
-      error: undefined,
+      error: undefined
     };
   }
 
-  static getDerivedStateFromError (error: Error, errorInfo: ErrorInfo): ErrorBoundaryState {
+  static getDerivedStateFromError (error: Error): ErrorBoundaryState {
     // eslint-disable-next-line no-console
-    console.error('Error detected: ', error, errorInfo);
+    console.error('Error detected: ', error);
     return {error};
   }
 
@@ -42,14 +42,14 @@ class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
       const val = errorJson[key];
       let detailArr = [val];
 
-      if (val && typeof val === 'string' && val.indexOf('\\n') !== -1) {
-        detailArr = val.split('\\n');
+      if (val && typeof val === 'string' && val.indexOf('\n') !== -1) {
+        detailArr = val.split('\n');
       }
 
       elements.push(
         <div key={key} className={`error-content-item ${key}`}>
           <hr />
-          <span className='key'>{key}:</span><br />
+          <div className='key'>{key}:</div>
           <div className='detail'>
             {detailArr.map((detail, index) => {
               return (

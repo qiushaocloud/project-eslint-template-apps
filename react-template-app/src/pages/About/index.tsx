@@ -1,4 +1,3 @@
-// eslint-disable-next-line no-use-before-define
 import React from 'react';
 import {Link} from 'react-router-dom';
 import QiushaoCloudPicJpg from '@assets/images/qiushaocloud-pic.jpg';
@@ -34,6 +33,8 @@ const AboutPage: React.FC = () => {
           </ul>
         </nav>
       </div>
+
+      <iframe src="https://www.qiushaocloud.top" width='100%' height='500px' ></iframe>
     </div>
   );
 };

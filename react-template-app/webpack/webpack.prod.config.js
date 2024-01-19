@@ -11,8 +11,15 @@ const baseWebpackConfig = require("./webpack.base.config");
 
 const packageJson = JSON.parse(JSON.minify(fs.readFileSync(path.resolve(__dirname, '../package.json'), 'utf8')));
 
+const baseCfgOpts = {
+    useMiniCssExtractPlugin: true,
+    // coverConf: undefined,
+    isPx2Rem: false,
+    // px2RemOptions: {}
+};
+
 // 使用 webpack-merge 合并基础配置和生产环境配置
-module.exports = WebpackMerge.merge(baseWebpackConfig('production'), {
+module.exports = WebpackMerge.merge(baseWebpackConfig('production', baseCfgOpts), {
     // 指定构建环境为生产环境
     mode: "production",
     
