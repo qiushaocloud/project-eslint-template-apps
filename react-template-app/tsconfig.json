@@ -33,6 +33,7 @@
             "@actions/*":["src/reduxs/actions/*"],
             "@reducers/*":["src/reduxs/reducers/*"],
             "@features/*":["src/reduxs/features/*"],
+            "@hooks/*":["src/reduxs/hooks/*"],
             "@storets":["src/reduxs/store.ts"],
             "@reduxs/*":["src/reduxs/*"],
             "@images/*":["src/assets/images/*"],
