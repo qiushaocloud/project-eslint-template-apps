@@ -40,7 +40,7 @@ module.exports = (nodeEnv, opts) => {
       return [];
     }
 
-    const getCssRuleUseArr = () => {
+    const getCssRuleUseArr = (isModuleCss) => {
       return [
         // 根据开发环境选择使用 style-loader 或 MiniCssExtractPlugin.loader
         (!isDevelopmentEnv || opts?.useMiniCssExtractPlugin) ? {
@@ -51,7 +51,15 @@ module.exports = (nodeEnv, opts) => {
           // }
         } : 'style-loader',
         // 使用 css-loader 处理 CSS 文件
-        `css-loader`,
+        isModuleCss ? {
+          loader: 'css-loader',
+          options: {
+            modules: {
+              // importLoaders: 1,
+              localIdentName: '[local]_[hash:base64:5]', 
+            }
+          }
+        } : `css-loader`,
         // 使用 postcss-loader 处理 CSS 文件，用于添加浏览器前缀等
         `postcss-loader`,
         ...getPxToRemArr()
@@ -80,21 +88,45 @@ module.exports = (nodeEnv, opts) => {
           {
             // 匹配以.css结尾的文件
             test: /\.css$/,
+            exclude: /\.module\.css$/,
             use: [...getCssRuleUseArr()]
           },
           {
-            // 匹配以.(sass|scss)结尾的文件
-            test: /\.(sass|scss)$/,
+            // 匹配以.module.css结尾的文件
+            test: /\.css$/,
+            use: [...getCssRuleUseArr(true)]
+          },
+          {
+            // 匹配以.sass、.scss结尾的文件
+            test: /\.(s(a|c)ss)$/,
+            exclude: /\.module\.(s(a|c)ss)$/,
             use: [
               ...getCssRuleUseArr(),
               'sass-loader'
             ]
           },
           {
+            // 匹配以.module.sass、.module.scss结尾的文件
+            test: /\.module\.(s(a|c)ss)$/,
+            use: [
+              ...getCssRuleUseArr(true),
+              'sass-loader'
+            ]
+          },
+          {
             // 匹配以.less结尾的文件
             test: /\.less$/,
+            exclude: /\.module\.less$/,
             use: [
               ...getCssRuleUseArr(),
+              'less-loader'
+            ]
+          },
+          {
+            // 匹配以.module.less结尾的文件
+            test: /\.module\.less$/,
+            use: [
+              ...getCssRuleUseArr(true),
               'less-loader'
             ]
           },

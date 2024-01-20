@@ -3,13 +3,13 @@ import {Link} from 'react-router-dom';
 import QiushaoCloudPicJpg from '@assets/images/qiushaocloud-pic.jpg';
 import {useAppSelector} from '@storets';
 import {addTodo, delTodo, setTodos} from '@actions/todos';
-import './index.less';
+import styles from './index.module.less';
 
 const AboutPage: React.FC = () => {
   const todos = useAppSelector(state => state.todos);
 
   return (
-    <div className="blog-wrapper">
+    <div className={`blog-wrapper ${styles.wrapper}`}>
       <img src={QiushaoCloudPicJpg} width={35} height={35} />
       邱少羽梦博客地址: <a href='https://www.qiushaocloud.top'>https://www.qiushaocloud.top</a>
       <div>

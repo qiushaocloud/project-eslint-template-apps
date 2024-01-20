@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom/client';
 import {Provider} from 'react-redux';
 import store from '@storets';
 import Router from '@pages/Router';
-import '@styles/global.less';
+import '@styles/index.less';
 
 const root = ReactDOM.createRoot(document.getElementById('app') as HTMLElement);
 // v18 的新方法

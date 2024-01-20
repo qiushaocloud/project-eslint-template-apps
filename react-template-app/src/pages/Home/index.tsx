@@ -3,14 +3,14 @@ import {Link} from 'react-router-dom';
 import QiushaoCloudPicJpg from '@assets/images/qiushaocloud-pic.jpg';
 import {useAppDispatch, useAppSelector} from '@storets';
 import {increment, decrement, incrBy, setCount, getCounterAPI} from '@features/counterSlice';
-import './index.less';
+import styles from './index.module.less';
 
 const HomePage: React.FC = () => {
   const dispatch = useAppDispatch();
   const {count} = useAppSelector(state => state.counter);
 
   return (
-    <div className="home-wrapper">
+    <div className={`home-wrapper ${styles.wrapper}`}>
       <img src={QiushaoCloudPicJpg} width={35} height={35} />
       邱少羽梦博客地址: <a href='https://www.qiushaocloud.top'>https://www.qiushaocloud.top</a>
       <div>
