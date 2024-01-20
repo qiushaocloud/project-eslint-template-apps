@@ -60,13 +60,6 @@ module.exports = (nodeEnv, opts) => {
             }
           }
         } : `css-loader`,
-        // 在这里引入要增加的全局less文件
-        {
-          loader: 'style-resources-loader',
-          options: {
-            patterns: resolve('../src/styles/variables.less')
-          }
-      	},
         // 使用 postcss-loader 处理 CSS 文件，用于添加浏览器前缀等
         `postcss-loader`,
         ...getPxToRemArr()
@@ -74,6 +67,44 @@ module.exports = (nodeEnv, opts) => {
 
       return ruleUseArr;
     };
+
+    const getScssOrLessRuleUseArr = (loaderName) => {
+      const patterns = [];
+      let fileSuffixs = [];
+
+      switch (loaderName) {
+        case 'sass-loader': {
+          fileSuffixs = ['.sass', '.scss'];
+          break;
+        }
+        case 'less-loader': {
+          fileSuffixs = ['.less'];
+          break;
+        }
+      }
+
+      for (const fileSuffix of fileSuffixs) {
+        patterns.push(resolve(`../src/styles/global/variables/*${fileSuffix}`));
+        patterns.push(resolve(`../src/styles/global/mixins/*${fileSuffix}`));
+        patterns.push(resolve(`../src/styles/global/funcs/*${fileSuffix}`));
+        patterns.push(resolve(`../src/styles/global/namespaces/*${fileSuffix}`));
+        patterns.push(resolve(`../src/styles/themes/theme-var${fileSuffix}`));
+      }
+
+      if (!patterns.length) return [];
+
+      const ruleUseArr = [
+        // 在这里引入要增加的全局less文件
+        {
+          loader: 'style-resources-loader',
+          options: {
+            patterns: patterns
+          }
+        }
+      ];
+     
+      return ruleUseArr;
+    }
 
     const config = {      
       // 模块配置，定义对不同类型文件的处理规则
@@ -97,13 +128,7 @@ module.exports = (nodeEnv, opts) => {
           {
             // 匹配以.css结尾的文件
             test: /\.css$/,
-            exclude: /\.module\.css$/,
             use: [...getCssRuleUseArr()]
-          },
-          {
-            // 匹配以.module.css结尾的文件
-            test: /\.css$/,
-            use: [...getCssRuleUseArr(true)]
           },
           {
             // 匹配以.sass、.scss结尾的文件
@@ -111,7 +136,8 @@ module.exports = (nodeEnv, opts) => {
             exclude: /\.module\.(s(a|c)ss)$/,
             use: [
               ...getCssRuleUseArr(),
-              'sass-loader'
+              'sass-loader',
+              ...getScssOrLessRuleUseArr('sass-loader')
             ]
           },
           {
@@ -119,7 +145,8 @@ module.exports = (nodeEnv, opts) => {
             test: /\.module\.(s(a|c)ss)$/,
             use: [
               ...getCssRuleUseArr(true),
-              'sass-loader'
+              'sass-loader',
+              ...getScssOrLessRuleUseArr('sass-loader')
             ]
           },
           {
@@ -128,7 +155,8 @@ module.exports = (nodeEnv, opts) => {
             exclude: /\.module\.less$/,
             use: [
               ...getCssRuleUseArr(),
-              'less-loader'
+              'less-loader',
+              ...getScssOrLessRuleUseArr('less-loader')
             ]
           },
           {
@@ -136,7 +164,8 @@ module.exports = (nodeEnv, opts) => {
             test: /\.module\.less$/,
             use: [
               ...getCssRuleUseArr(true),
-              'less-loader'
+              'less-loader',
+              ...getScssOrLessRuleUseArr('less-loader')
             ]
           },
           {

@@ -14,6 +14,7 @@ const AboutPage: React.FC = () => {
       <img src={QiushaoCloudPicJpg} width={35} height={35} />
       邱少羽梦博客地址: <a href='https://www.qiushaocloud.top'>https://www.qiushaocloud.top</a>
       <div>
+        <button onClick={() => document.documentElement.setAttribute('data-theme-mode', document.documentElement.getAttribute('data-theme-mode') === 'light' ? 'dark' : 'light')}>切换主题</button>
         <button><Link to="/">Home 页面</Link></button>
         <button><Link to="/about">关于页面</Link></button>
         <button><Link to="/blog">博客页面</Link></button>

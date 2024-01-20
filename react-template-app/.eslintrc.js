@@ -27,7 +27,8 @@ module.exports = {
         'tsconfig.json',
         '.eslintrc.js',
         'babel.config.js',
-        'postcss.config.js'
+        'postcss.config.js',
+        'jsconfig.json'
     ],
     'rules': {
         'indent': [  //强制使用一致的缩进：tab

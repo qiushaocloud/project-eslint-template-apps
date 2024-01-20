@@ -43,7 +43,8 @@
         },
         "esModuleInterop": true,                    /* 启用 CommonJS 和 ES 模块之间的互操作性。 */
         "experimentalDecorators": true,            /* 启用实验性的 ES7 装饰器支持。 */
-        "emitDecoratorMetadata": true               /* 在装饰器上生成元数据，用于反射。 */
+        "emitDecoratorMetadata": true,               /* 在装饰器上生成元数据，用于反射。 */
+        "plugins": [{"name": "typescript-plugin-css-modules"}]
     },
     "include": [                                     /* 包含在编译中的文件或目录。 */
         "src/**/*",
@@ -52,7 +53,8 @@
     ],
     "exclude": [                                    /* 排除在编译之外的文件或目录。 */
         "node_modules",
-        "dist"                                      
+        "dist",                                    
+        "dist-dev"                                    
     ]
 }
   

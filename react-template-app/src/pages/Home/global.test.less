@@ -1,0 +1,59 @@
+@import '@styles/global/mix-styles/test.less';
+
+// 所有操作数被转换成相同的单位
+@conversion-1: 5cm + 10mm; // 结果是 6cm
+@conversion-2: 2 - 3cm - 5mm; // 结果是 -1.5cm
+
+// example with variables
+@base: 5%;
+@filler: @base * 2; // 结果是 10%
+@other: @base + @filler; // 结果是 15%
+
+.operations-test {
+  .conversion-1 {
+    width: @conversion-1;
+  }
+
+  .conversion-2 {
+    width: @conversion-2;
+  }
+
+  .filler {
+    width: @filler;
+  }
+
+  .other {
+    width: @other;
+  }
+}
+
+// 在项目中使用全局变量
+.global-var-test {
+  color: @global-var-test-primary-color;
+  border-radius: @global-var-test-border-radius;
+}
+
+.global-mix-test {
+// 在项目中使用全局混合器
+  .global-mix-test-rounded-corners();
+// 在项目中使用全局样式规则
+  .global-mix-test-class-name(); // 通过类或选择器嵌套使用全局样式规则
+}
+
+// 在项目中使用全局命名空间
+.global-namespace-test {
+  .button {
+    width: 111px;
+    border: 111px solid black;
+  }
+  .custom-class-name1 {
+    font-weight: bold;
+  }
+  #global-namespace-test.button();
+}
+
+// 使用全局函数
+.global-fn-test {
+  .global-fn-test-calculate-width(200px);
+  .global-fn-test-generate-gradient(#3498db, #ffffff);
+}

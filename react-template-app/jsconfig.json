@@ -1,0 +1,33 @@
+{
+  "compilerOptions": {
+    "module": "ES5",
+    "target": "ESNext",
+    "allowSyntheticDefaultImports": true,
+    "baseUrl": "./",
+    "paths": {
+      "@default/*":["src/default/*"],
+      "@enum/*":["src/enum/*"],
+      "@common/*":["src/common/*"],
+      "@helpers/*":["src/helpers/*"],
+      "@styles/*":["src/styles/*"],
+      "@pages/*":["src/pages/*"],
+      "@services/*":["src/services/*"],
+      "@components/*":["src/components/*"],
+      "@containers/*":["src/containers/*"],
+      "@actionTypes/*":["src/reduxs/actionTypes/*"],
+      "@actions/*":["src/reduxs/actions/*"],
+      "@reducers/*":["src/reduxs/reducers/*"],
+      "@features/*":["src/reduxs/features/*"],
+      "@hooks/*":["src/reduxs/hooks/*"],
+      "@storets":["src/reduxs/store.ts"],
+      "@reduxs/*":["src/reduxs/*"],
+      "@images/*":["src/assets/images/*"],
+      "@fonts/*":["src/assets/fonts/*"],
+      "@assets/*":["src/assets/*"],
+      "@src/*":["src/*"]
+    }
+  },
+  "allowJs": true,
+  "exclude": ["node_modules", "dist", "dist-dev"],
+  "include": ["src", "test", "typings"]
+}
