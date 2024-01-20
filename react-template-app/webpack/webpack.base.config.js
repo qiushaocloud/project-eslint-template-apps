@@ -41,7 +41,7 @@ module.exports = (nodeEnv, opts) => {
     }
 
     const getCssRuleUseArr = (isModuleCss) => {
-      return [
+      const ruleUseArr = [
         // 根据开发环境选择使用 style-loader 或 MiniCssExtractPlugin.loader
         (!isDevelopmentEnv || opts?.useMiniCssExtractPlugin) ? {
           loader: MiniCssExtractPlugin.loader,
@@ -56,14 +56,23 @@ module.exports = (nodeEnv, opts) => {
           options: {
             modules: {
               // importLoaders: 1,
-              localIdentName: '[local]_[hash:base64:5]', 
+              localIdentName: '[local]_[hash:base64:8]', 
             }
           }
         } : `css-loader`,
+        // 在这里引入要增加的全局less文件
+        {
+          loader: 'style-resources-loader',
+          options: {
+            patterns: resolve('../src/styles/variables.less')
+          }
+      	},
         // 使用 postcss-loader 处理 CSS 文件，用于添加浏览器前缀等
         `postcss-loader`,
         ...getPxToRemArr()
-      ]
+      ];
+
+      return ruleUseArr;
     };
 
     const config = {      
