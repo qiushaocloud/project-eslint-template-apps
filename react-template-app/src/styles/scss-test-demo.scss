@@ -1,0 +1,161 @@
+.scss-test-demo {
+    // Sass 变量
+    $myFont: Helvetica, sans-serif;
+    $myColor: red;
+    $myFontSize: 18px;
+    $myWidth: 680px;
+
+    body {
+        font-family: $myFont;
+        font-size: $myFontSize;
+        color: $myColor;
+    }
+
+    #container {
+        width: $myWidth;
+    }
+
+
+    // Sass 作用域: !global
+    $myColor: red;
+
+    h1 {
+        $myColor: green;
+        color: $myColor;
+    }
+
+    p {
+        color: $myColor;
+    }
+
+
+    // Sass 嵌套规则与属性
+    nav {
+        ul {
+          margin: 0;
+          padding: 0;
+          list-style: none;
+        }
+        li {
+          display: inline-block;
+        }
+        a {
+          display: block;
+          padding: 6px 12px;
+          text-decoration: none;
+        }
+    }
+
+
+    // Sass 嵌套属性
+    font: {
+        family: Helvetica, sans-serif;
+        size: 18px;
+        weight: bold;
+      }
+      
+    text: {
+        align: center;
+        transform: lowercase;
+        overflow: hidden;
+    }
+
+
+    // Sass @import
+    // @import filename;
+    /** Sass Partials
+    但是，在导入语句中我们不需要添加下划线。
+    Sass Partials 语法格式： _filename;
+
+    _colors.scss 文件代码：
+        $myPink: #EE82EE;
+        $myBlue: #4169E1;
+        $myGreen: #8FBC8F;
+
+    实例
+        @import "colors";
+
+        body {
+        font-family: Helvetica, sans-serif;
+        font-size: 18px;
+        color: $myBlue;
+        }
+    */ 
+
+
+    // Sass @mixin
+    @mixin important-text {
+        color: red;
+        font-size: 25px;
+        font-weight: bold;
+        border: 1px solid blue;
+    }
+
+
+    // 使用混入
+    .danger {
+        @include important-text;
+        background-color: green;
+    }
+
+    // 向混入传递变量
+    /* 混入接收两个参数 */
+    @mixin bordered($color, $width) {
+        border: $width solid $color;
+    }
+  
+    .myArticle {
+        @include bordered(blue, 1px);  // 调用混入，并传递两个参数
+    }
+    
+    .myNotes {
+        @include bordered(red, 2px); // 调用混入，并传递两个参数
+    }
+
+    // 混入的参数也可以定义默认值，语法格式如下
+    @mixin sexy-border($color, $width: 1in) {
+        border: {
+          color: $color;
+          width: $width;
+          style: dashed;
+        }
+    }
+    p { @include sexy-border(blue); }
+    h1 { @include sexy-border(blue, 2in); }
+
+    // 可变参数
+    @mixin box-shadow($shadows...) {
+        -moz-box-shadow: $shadows;
+        -webkit-box-shadow: $shadows;
+        box-shadow: $shadows;
+    }
+    
+    .shadows {
+        @include box-shadow(0px 4px 5px #666, 2px 6px 10px #999);
+    }
+
+
+    // Sass @extend 与 继承
+    .button-basic  {
+        border: none;
+        padding: 15px 30px;
+        text-align: center;
+        font-size: 16px;
+        cursor: pointer;
+    }
+    
+    .button-report  {
+        @extend .button-basic;
+        background-color: red;
+    }
+    
+    .button-submit  {
+        @extend .button-basic;
+        background-color: green;
+        color: white;
+    }
+
+
+    // Sass 函数
+    // Sass 定义了各种类型的函数，这些函数我们可以通过 CSS 语句直接调用。
+}
