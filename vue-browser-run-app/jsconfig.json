@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@assets/*": ["assets/*"],
+      "@components/*": ["components/*"],
+      "@views/*": ["views/*"],
+      "@js/*": ["js/*"],
+      "@libs/*": ["libs/*"],
+      "@pages/*": ["pages/*"],
+      "@scss/*": ["scss/*"],
+      "@store": ["store/index.js"],
+      "@getstore": ["store/vue-get-store.mjs"],
+      "@/*": ["*"],
+    }
+  }
+}
