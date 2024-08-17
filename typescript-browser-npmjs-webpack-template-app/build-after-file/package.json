@@ -6,7 +6,7 @@
   "license": "MIT",
   "main": "./main.js",
   "types": "./main.d.ts",
-  "keywords": ["https://www.qiushaocloud.top", "qiushaocloud", "@qiushaocloud/qfuncs", "qfuncs"],
+  "keywords": ["https://www.qiushaocloud.top", "qiushaocloud", "@qiushaocloud/xxxname", "xxxname"],
   "scripts": {
     "inner-publish-npmjs": "npm publish --registry https://registry.npmjs.org/ --access=public",
     "inner-publish-npmjs-by-token": "npm publish --registry https://registry.npmjs.org/ --access=public --token=$NPM_QIUSHAOCLOUD_PUBLISH_TOKEN",
