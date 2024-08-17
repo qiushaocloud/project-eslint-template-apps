@@ -2,10 +2,14 @@
 <template>
   <div class="app-container">
     <div id="nav">
-      {{ disabledUserAuthCheck }} --- {{ authUserInfo }}
-      <router-link to="/"> 首页 </router-link> |
-      <router-link to="/page1"> Page1 </router-link>
-      <router-link to="/page2"> Page2 </router-link>
+      <span class="left">
+        <img src="./assets/images/touxiang.jpg" width="50px" height="50px" alt="logo">
+        <router-link to="/"> 首页 </router-link>
+      </span>
+      <span class="right">
+        <router-link v-if="!authUser.name" to="/login"> 登录 </router-link>
+        <router-link to="/register"> 注册 </router-link>
+      </span>
     </div>
     <router-view />
   </div>
@@ -13,7 +17,6 @@
 
 <script>
   import './scss/global.scss';
-  import '@js/user-auth-helper.js';
   import { showMessage } from '@js/element-plus-helper.mjs';
   import { mapState, mapActions } from 'vuex';
 

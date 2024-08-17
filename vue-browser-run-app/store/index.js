@@ -1,60 +1,53 @@
 const { createStore } = Vuex;
 // const { createStore, createLogger } = Vuex;
 
-const store = createStore({
+let userSeq = 4;
+const storeConfig = {
   // plugins: [createLogger()],
   state: {
-    disabledUserAuthCheck: false,
-    authUserInfo: {
-      id: -1,
-      username: '',
-      role: '',
-      loginTs: -1
-    },
-    // count: 0,
-    // users: [{id: 1, name: "Alice"}]
+    count: 0,
+  	users: [
+    	{id: 1, name: "Alice", age: 25, email: "alice@example.com"},
+    	{id: 2, name: "Bob", age: 30, email: "bob@example.com"},
+    	{id: 3, name: "Charlie", age: 35, email: "charlie@example.com"}
+  	],
+    authUser: {id: -1, name: "", age: -1, email: ""}
   },
   getters: {
-    // getCount: (state) => state.count,
-    // getUser: (state, id) => {
-    //   return state.users.find(user => user.id === id);
-    // },
-    // getUsers: state => state.users
+    getCount: (state) => state.count,
+    getUser: (state, id) => state.users.find(user => user.id === id),
+    getUsers: state => state.users,
+    getAuthUser: state => state.authUser
   },
   mutations: {
-    setDisabledUserAuthCheck(state, isDisabled) {
-      state.disabledUserAuthCheck = isDisabled;
+    increment(state) {
+      state.count++;
     },
-    setAuthUserInfo(state, userInfo) {
-      state.authUserInfo = {...userInfo};
-    }
-    // increment(state) {
-    //   state.count++;
-    // },
-    // addUser(state, user) {
-    //   state.users.push(user);
-    // },
-    // setUsers(state, users){
-    //   state.users = users;
-    // }
   },
   actions: {
-    setDisabledUserAuthCheck({ commit }, isDisabled) {
-      commit('setDisabledUserAuthCheck', isDisabled);
+    increment({ commit }) {
+      commit('increment');
     },
-    setAuthUserInfo({ commit }, userInfo) {
-      commit('setAuthUserInfo', userInfo);
-    }
-    // increment({ commit }) {
-    //   commit('increment');
-    // },
-    // addUser({ commit }, user) {
-    //   commit('addUser', user);
-    // }
   },
-  modules: {},
-})
+  modules: {}
+}
 
-window.customAppStore = store;
-console.info("store created")
+const addSyncMutationAndAction = (mutationName, mutationHandle) => {
+	storeConfig.mutations[mutationName] = mutationHandle;
+  storeConfig.actions[mutationName] = ({ commit }, payload) => commit(mutationHandle, payload);
+}
+
+addSyncMutationAndAction('addUser', (state, payload) => {
+  const {name, age, email} = payload;
+  const user = {id: ++userSeq, name, age, email};
+  state.users.push(user);
+});
+
+addSyncMutationAndAction('setAuthUser', (state, payload) => {
+	if (!payload || typeof payload !== 'object') return state.authUser = {id: -1, name: "", age: -1, email: ""};
+  state.authUser = {...payload};
+});
+
+const store = createStore(storeConfig);
+console.info("store created");
 export default store;

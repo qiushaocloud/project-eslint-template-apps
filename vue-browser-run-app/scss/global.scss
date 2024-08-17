@@ -6,3 +6,34 @@
 html {
   font-family: "Helvetica Neue", Helvetica, Arial, "PingFang SC", "Hiragino Sans GB", "Heiti SC", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
 }
+
+@mixin flex-config($direction: row, $is-center: false, $is-wrap: false) {
+  display: flex;
+  @if $direction == column {
+    flex-direction: column;
+  }
+  @if $is-center {
+    justify-content: center;
+		align-items: center;
+  }
+  @if $is-wrap {
+    flex-wrap: wrap;
+  }
+}
+
+.add-flex {
+  display: flex;
+
+  &-column {
+    flex-direction: column;
+  }
+
+  &-center, &-column-center {
+    justify-content: center;
+    align-items: center;
+  }
+
+  &-wrap, &-column-warp {
+    flex-wrap: wrap;
+  }
+}

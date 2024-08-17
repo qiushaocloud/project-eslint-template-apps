@@ -1,4 +1,17 @@
 (() => {
+  // 在这里定义项目用到的别名路径映射
+  const aliasPathMap = {
+    "@/": "",
+    "@assets/": "assets/",
+    "@components/": "components/",
+    "@views/": "views/",
+    "@js/": "js/",
+    "@libs/": "libs/",
+    "@pages/": "pages/",
+    "@scss/": "scss/",
+    "@storedir": "store/*"
+  }
+
   // Sass 编译函数
   let sassSyncJsLoadStatus = 0; // 0: 未加载，1: 加载中，2: 已加载，-1: 加载失败
   let sassSyncJsCache = [];
@@ -80,40 +93,21 @@
     vueComponentStyle.innerHTML += textContent; // 追加到 vueComponentStyle 内容后
   }
 
-  const aliasPathMap = {
-    "@/": "",
-    "@assets/": "assets/",
-    "@components/": "components/",
-    "@views/": "views/",
-    "@js/": "js/",
-    "@libs/": "libs/",
-    "@pages/": "pages/",
-    "@scss/": "scss/",
-    "@store": "store/vue-get-store.mjs",
-    "@getstore": "store/vue-get-store.mjs", // store 和 getstore 这两个都是一样的，只不过在代码中引入不一样，以便快速跳转，方便代码的开发
-  }
   const replaceAliasToPath = (content, isFilePath) => {
-    // '@/ | "@/ | url(@/
-    content = content.replace(/\'@\//g, '\'').replace(/\"@\//g, '\"').replace(/url\(@\//g, 'url(');
     for (const key in aliasPathMap) {
       const value = aliasPathMap[key];
-      switch (key) {
-        case '@store': {
-          if (isFilePath) {
-            content = content.replace(new RegExp('^'+key+'$', ''), value);
-            break;
-          }
-          content = content.replace(new RegExp('\''+key+'\'', 'g'), '\''+value+'\'').replace(new RegExp('\"'+key+'\"', 'g'), '\"'+value+'\"').replace(new RegExp('url\\('+key+'\\)', 'g'), 'url('+value+')');
+      if (/\/$/.test(value)) {
+        if (isFilePath) {
+          content = content.replace(new RegExp('^'+key, ''), value);
           break;
         }
-        default: {
-          if (isFilePath) {
-            content = content.replace(new RegExp('^'+key, ''), value);
-            break;
-          }
-          content = content.replace(new RegExp('\''+key, 'g'), '\''+value).replace(new RegExp('\"'+key, 'g'), '\"'+value).replace(new RegExp('url\\('+key, 'g'), 'url('+value);
+        content = content.replace(new RegExp('\''+key, 'g'), '\''+value).replace(new RegExp('\"'+key, 'g'), '\"'+value).replace(new RegExp('url\\('+key, 'g'), 'url('+value);
+      } else {
+        if (isFilePath) {
+          content = content.replace(new RegExp('^'+key+'$', ''), value);
           break;
         }
+        content = content.replace(new RegExp('\''+key+'\'', 'g'), '\''+value+'\'').replace(new RegExp('\"'+key+'\"', 'g'), '\"'+value+'\"').replace(new RegExp('url\\('+key+'\\)', 'g'), 'url('+value+')');
       }
     }
     return content;
@@ -156,6 +150,7 @@
     window.VueRouter && (moduleCache['vue-router'] = window.VueRouter);
     window.Vuex && (moduleCache['vuex'] = window.Vuex);
     window.ElementPlus && (moduleCache['element-plus'] = window.ElementPlus);
+		window.customVueStore	&& (moduleCache['@store'] = window.customVueStore); // 项目的 vue store
 
     const options = {
       moduleCache: moduleCache,
