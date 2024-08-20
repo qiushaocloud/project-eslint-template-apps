@@ -1,15 +1,35 @@
 (() => {
   // 在这里定义项目用到的别名路径映射
   const aliasPathMap = {
-    "@/": "",
     "@assets/": "assets/",
     "@components/": "components/",
     "@views/": "views/",
     "@js/": "js/",
+    "@services/": "services/",
     "@libs/": "libs/",
     "@pages/": "pages/",
     "@scss/": "scss/",
-    "@storedir": "store/*"
+    "@/": ""
+  }
+  const forceFileTypes = {}
+
+  const addModules2Cache = (moduleCache) => {
+    window.VueRouter && (moduleCache['vue-router'] = window.VueRouter);
+    window.Vuex && (moduleCache['vuex'] = window.Vuex);
+    window.ElementPlus && (moduleCache['element-plus'] = window.ElementPlus);
+    window.ElementPlusIconsVue && (moduleCache['@element-plus/icons-vue'] = window.ElementPlusIconsVue);
+    window.VueVirtualScroller && (moduleCache['vue-virtual-scroller'] = window.VueVirtualScroller);
+		window.customVue3SFCLoaderStore	&& (moduleCache['@store'] = window.customVue3SFCLoaderStore); // 项目的 vue store
+    window.customVue3SFCLoaderRouter && (moduleCache['@router'] = window.customVue3SFCLoaderRouter); // 项目的 vue router
+  }
+
+  const getForceFileType = (filePath) => {
+    if (forceFileTypes[filePath] !== undefined) return forceFileTypes[filePath];
+    for (const forceFilePath in forceFileTypes) {
+      if (filePath === replaceAliasToPath(forceFilePath, true)) {
+        return forceFileTypes[forceFilePath]; // 如果文件路径完全匹配，则直接返回对应的文件类型
+      }
+    }
   }
 
   // Sass 编译函数
@@ -45,23 +65,64 @@
     });
   }
 
+  let cacheSassFileContent = {}; // 缓存 sass 文件内容
+  let delayCleanCacheSassFileContentTimer = null;
+  const loadSassFileContent = (filePath) => {
+    if (!filePath) return Promise.resolve('');
+    filePath = replaceAliasToPath(filePath, true); // 替换别名
+    const fileUrl = `${location.origin}${location.pathname.replace(/^\/$/, '')}/${filePath}`;
+    delayCleanCacheSassFileContentTimer && clearTimeout(delayCleanCacheSassFileContentTimer);
+    delayCleanCacheSassFileContentTimer = setTimeout(() => {
+      console.log('loadSassFileContent clean cacheSassFileContent, fileUrls:', Object.keys(cacheSassFileContent));
+      cacheSassFileContent = {};
+      delayCleanCacheSassFileContentTimer = null;
+    }, 1000 * 60 * 2); // 2分钟后清理缓存
+    if (cacheSassFileContent[fileUrl]) return Promise.resolve(cacheSassFileContent[fileUrl]);
+    console.log('loadSassFileContent fetch fileUrl:', fileUrl);
+    return fetch(fileUrl).then(res => res.ok ? res.text() : '').then((fileContent) => {
+      if (!fileContent) {
+        console.error('loadSassFileContent fetch is failure, fileUrl:', fileUrl);
+        return '';
+      }
+      console.log('loadSassFileContent fetch ok, fileUrl:', fileUrl);
+      cacheSassFileContent[fileUrl] = fileContent;
+      return fileContent;
+    }).catch((error) => {
+      console.error('loadSassFileContent catch error:', error, ' ,fileUrl:', fileUrl);
+      return '';
+    });
+  }
+
   let compileSassSeq = 0; // 编译 sass 的序号
-  const compileSass = (scss) => {
-    if (!scss) return Promise.resolve('');
+  const compileSass = (scssContent) => {
+    if (!scssContent) return Promise.resolve('');
     const currSeq = ++compileSassSeq;
     console.log('start compileSass seq:', currSeq);
     return new Promise((resolve, reject) => {
       loadSassSyncMinJs().then(() => {
         console.log('start compileSass, seq:', currSeq);
         if (!window.Sass) return reject('window.Sass is undefined');
-        window.Sass.compile(scss, result => {
-          if (result.status === 0) {
-            console.log('compileSass ok, seq:', currSeq);
-            resolve(result.text);
-          } else {
-            console.error('compileSass failure, seq:', currSeq);
-            reject(result.formatted);
+        // 识别scssContent @import 语句，并且加载对应文件内容进行替换
+        const importMatchs = scssContent.match(/@import\s+.*;/g);
+        const promiseArr = [];
+        if (importMatchs && importMatchs.length) {
+          for (const importMatchStr of importMatchs) {
+            const scssFilePath = importMatchStr.replace(/(@import |;|'|")/g, '');
+            promiseArr.push(loadSassFileContent(scssFilePath).then((fileContent) => {
+              scssContent = scssContent.replace(importMatchStr, fileContent);
+            }));
           }
+        }
+        Promise.all(promiseArr).then(() => {
+          window.Sass.compile(scssContent, result => {
+            if (result.status === 0) {
+              console.log('compileSass ok, seq:', currSeq);
+              resolve(result.text);
+            } else {
+              console.error('compileSass failure, seq:', currSeq);
+              reject(result.formatted);
+            }
+          });
         });
       }).catch(reject);
     });
@@ -99,13 +160,13 @@
       if (/\/$/.test(value)) {
         if (isFilePath) {
           content = content.replace(new RegExp('^'+key, ''), value);
-          break;
+          continue;
         }
         content = content.replace(new RegExp('\''+key, 'g'), '\''+value).replace(new RegExp('\"'+key, 'g'), '\"'+value).replace(new RegExp('url\\('+key, 'g'), 'url('+value);
       } else {
         if (isFilePath) {
           content = content.replace(new RegExp('^'+key+'$', ''), value);
-          break;
+          continue;
         }
         content = content.replace(new RegExp('\''+key+'\'', 'g'), '\''+value+'\'').replace(new RegExp('\"'+key+'\"', 'g'), '\"'+value+'\"').replace(new RegExp('url\\('+key+'\\)', 'g'), 'url('+value+')');
       }
@@ -147,16 +208,15 @@
   window.getSfcLoaderOptions = () => {
     if (!window.Vue) throw new Error('window.Vue is undefined, please load vue.js script file');
     const moduleCache = {vue: window.Vue};
-    window.VueRouter && (moduleCache['vue-router'] = window.VueRouter);
-    window.Vuex && (moduleCache['vuex'] = window.Vuex);
-    window.ElementPlus && (moduleCache['element-plus'] = window.ElementPlus);
-		window.customVueStore	&& (moduleCache['@store'] = window.customVueStore); // 项目的 vue store
+    addModules2Cache(moduleCache);
 
     const options = {
       moduleCache: moduleCache,
       getFile: (url) => {
         if (/^(scss|sass|css)$/.test(url)) return ''; // vue style 设置了 lang="scss" 会导致下载 scss 文件，这里 忽略 scss/sass 请求
         console.log('getFile start replaceAliasToPath url:', url);
+        const forceFileType = getForceFileType(url);
+        forceFileType && console.log('getFile forceFileType:', forceFileType, ' ,url:', url);
         url = replaceAliasToPath(url, true); // 替换别名
         console.log('getFile end replaceAliasToPath url:', url);
         if (/\.(jpeg|jpg|png|gif)(?:\?.*)?$/.test(url) && !/\?.*format_type=(binary|blob|base64)/.test(url)) return ''; // 如果是图片，则直接返回空字符串
@@ -172,7 +232,9 @@
               console.log('getFile fetch ok, url:', url);
               const result = {};
 
-              if (/\.js(?:\?.*)?$/.test(url) && !/\?.*format_type=javascript/.test(url)) { // 如果是 js 文件，则需要处理成 module，返回成 mjs
+              if (forceFileType) {
+                result.type = forceFileType;
+              } else if (/\.js(?:\?.*)?$/.test(url) && !/\?.*format_type=javascript/.test(url)) { // 如果是 js 文件，则需要处理成 module，返回成 mjs
                 result.type = '.mjs';
               }
 
