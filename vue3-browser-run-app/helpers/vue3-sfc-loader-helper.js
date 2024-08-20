@@ -4,14 +4,13 @@
     "@assets/": "assets/",
     "@components/": "components/",
     "@views/": "views/",
-    "@js/": "js/",
+    "@helpers/": "helpers/",
     "@services/": "services/",
     "@libs/": "libs/",
     "@pages/": "pages/",
     "@scss/": "scss/",
     "@/": ""
   }
-  const forceFileTypes = {}
 
   const addModules2Cache = (moduleCache) => {
     window.VueRouter && (moduleCache['vue-router'] = window.VueRouter);
@@ -21,15 +20,6 @@
     window.VueVirtualScroller && (moduleCache['vue-virtual-scroller'] = window.VueVirtualScroller);
 		window.customVue3SFCLoaderStore	&& (moduleCache['@store'] = window.customVue3SFCLoaderStore); // 项目的 vue store
     window.customVue3SFCLoaderRouter && (moduleCache['@router'] = window.customVue3SFCLoaderRouter); // 项目的 vue router
-  }
-
-  const getForceFileType = (filePath) => {
-    if (forceFileTypes[filePath] !== undefined) return forceFileTypes[filePath];
-    for (const forceFilePath in forceFileTypes) {
-      if (filePath === replaceAliasToPath(forceFilePath, true)) {
-        return forceFileTypes[forceFilePath]; // 如果文件路径完全匹配，则直接返回对应的文件类型
-      }
-    }
   }
 
   // Sass 编译函数
@@ -217,8 +207,6 @@
       getFile: (url) => {
         if (/^(scss|sass|css)$/.test(url)) return ''; // vue style 设置了 lang="scss" 会导致下载 scss 文件，这里 忽略 scss/sass 请求
         console.log('getFile start replaceAliasToPath url:', url);
-        const forceFileType = getForceFileType(url);
-        forceFileType && console.log('getFile forceFileType:', forceFileType, ' ,url:', url);
         url = replaceAliasToPath(url, true); // 替换别名
         console.log('getFile end replaceAliasToPath url:', url);
         if (/\.(jpeg|jpg|png|gif)(?:\?.*)?$/.test(url) && !/\?.*format_type=(binary|blob|base64)/.test(url)) return ''; // 如果是图片，则直接返回空字符串
@@ -234,9 +222,7 @@
               console.log('getFile fetch ok, url:', url);
               const result = {};
 
-              if (forceFileType) {
-                result.type = forceFileType;
-              } else if (/\.js(?:\?.*)?$/.test(url) && !/\?.*format_type=javascript/.test(url)) { // 如果是 js 文件，则需要处理成 module，返回成 mjs
+              if (/\.js(?:\?.*)?$/.test(url) && !/\?.*format_type=javascript/.test(url)) { // 如果是 js 文件，则需要处理成 module，返回成 mjs
                 result.type = '.mjs';
               }
 

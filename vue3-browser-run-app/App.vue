@@ -8,7 +8,7 @@
 <script>
   import './scss/global.scss';
   import { getCurrentInstance } from 'vue';
-  import { showMessageBox } from '@js/element-plus-helper.mjs';
+  import { showMessageBox } from '@helpers/element-plus-helper.mjs';
   import { mapState } from 'vuex';
   import UserService from '@services/UserService.mjs';
   import RouteService from '@services/RouteService.mjs';

@@ -44,7 +44,7 @@
 </template>
 
 <script>
-import { showMsgTip } from '@js/element-plus-helper.mjs';
+import { showMsgTip } from '@helpers/element-plus-helper.mjs';
 import RouteService from '@services/RouteService.mjs';
 import UserService from '@services/UserService.mjs';
 import { mapState } from 'vuex';

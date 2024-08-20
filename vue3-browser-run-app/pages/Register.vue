@@ -32,7 +32,7 @@
 import RouteService from '@services/RouteService.mjs';
 import { mapState } from 'vuex';
 import AddOrEditUserForm from '@views/Header/AddOrEditUserForm.vue';
-import { showMessageBox } from '@js/element-plus-helper.mjs';
+import { showMessageBox } from '@helpers/element-plus-helper.mjs';
 import Settings from '@views/Header/Settings.vue';
 
 export default {

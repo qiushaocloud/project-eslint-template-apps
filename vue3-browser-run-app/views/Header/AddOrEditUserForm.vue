@@ -41,7 +41,7 @@
 
 <script>
 import { mapActions } from 'vuex';
-import { showMsgTip, closeElMessageBox } from '@js/element-plus-helper.mjs';
+import { showMsgTip, closeElMessageBox } from '@helpers/element-plus-helper.mjs';
 import UserService from '@services/UserService.mjs';
 
 export default {

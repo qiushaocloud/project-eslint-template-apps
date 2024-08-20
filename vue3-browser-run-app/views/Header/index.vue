@@ -24,7 +24,7 @@
 <script setup>
   import { ref, h } from 'vue';
   import { useStore } from 'vuex';
-  import { showConfirmBox, showMessageBox } from '@js/element-plus-helper.mjs';
+  import { showConfirmBox, showMessageBox } from '@helpers/element-plus-helper.mjs';
   import UserService from '@services/UserService.mjs';
   import RouteService from '@services/RouteService.mjs';
   import AddOrEditUserForm from './AddOrEditUserForm.vue';

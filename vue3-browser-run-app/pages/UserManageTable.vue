@@ -24,7 +24,7 @@
   import { computed, h } from 'vue'
   import Header from '@views/Header/index.vue';
   import { useStore } from 'vuex';
-  import { showMessageBox } from '@js/element-plus-helper.mjs';
+  import { showMessageBox } from '@helpers/element-plus-helper.mjs';
   import AddOrEditUserForm from '@views/Header/AddOrEditUserForm.vue';
 
   const store = useStore();
