@@ -29,7 +29,7 @@ export default {
   },
   setup() {
     const showSettings = ref(false);
-    const vConsoleEnabled = ref(localStorage.getItem('vueBrowserRunApp_vConsoleEnabled') ? localStorage.getItem('vueBrowserRunApp_vConsoleEnabled') === 'true' : true);
+    const vConsoleEnabled = ref(localStorage.getItem('vueBrowserRunApp_vConsoleEnabled') === 'true');
     document.querySelector('#__vconsole') && (document.querySelector('#__vconsole').style.display = vConsoleEnabled.value ? null : 'none');
     const toggleVConsole = (enabled) => {
       localStorage.setItem('vueBrowserRunApp_vConsoleEnabled', enabled);
