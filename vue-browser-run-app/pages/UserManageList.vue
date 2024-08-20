@@ -1,10 +1,11 @@
 <template>
   <el-container class="user-manage-list-container add-vh-100" direction="vertical">
     <Header />
-    <el-main class="data-container add-important-flex-column">
+    <auth-el-main class="data-container add-important-flex-column">
       <h3>用户管理列表</h3>
       <RecycleScroller
         class="user-list scroller"
+        :key="users.length"
         :items="users"
         :item-size="50"
         :prerender="10"
@@ -20,16 +21,16 @@
           <span class="email">{{ item.email }}</span>
           <span class="operations">
             <el-button type="text" class="operation-btn edit-btn" @click="showEditUserBox(item.id)">编辑</el-button>
-            <el-button type="text" class="operation-btn del-btn" @click="() => store.dispatch('user/delUser', item.id)">删除</el-button>
+            <el-button type="text" class="operation-btn del-btn" @click="handleDelUser(item.id)">删除</el-button>
           </span>
         </div>
       </RecycleScroller>
-    </el-main>
+    </auth-el-main>
   </el-container>
 </template>
 
 <script setup>
-  import { reactive, h } from 'vue'
+  import { computed, h } from 'vue'
   import Header from '@views/Header/index.vue';
   import { useStore } from 'vuex';
   import { RecycleScroller } from 'vue-virtual-scroller';
@@ -37,10 +38,10 @@
   import AddOrEditUserForm from '@views/Header/AddOrEditUserForm.vue';
 
   const store = useStore();
-  const users = reactive(store.state.user.users);
+  const users = computed(() => store.state.user.users);
 
   const showEditUserBox = (updateUserId) => {
-    showMessageBox(() => h(AddOrEditUserForm, {pluginType: 'Edit', updateUserId}), {
+    showMessageBox(() => h(AddOrEditUserForm, {actionType: 'Update', updateUserId, autoCloseMessageBox: true}), {
       class: 'edit-user-box',
       title: '用户编辑框',
       showConfirmButton: false,
@@ -48,6 +49,12 @@
         width: '100%'
       }
     });
+  }
+
+  const handleDelUser = (delUserId) => {
+    showMessageBox('是否确定删除用户?').then(() => {
+      store.dispatch('user/delUser', delUserId);
+    })
   }
 </script>
 

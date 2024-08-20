@@ -1,5 +1,6 @@
 <template>
   <div class="login-container">
+    <Settings />
     <el-dialog
       class="authed-dialog"
       v-if="isAuthed"
@@ -19,7 +20,7 @@
     </el-dialog>
     <el-card v-if="!isAuthed" class="login-card">
       <h2 class="login-title">登录</h2>
-      <el-form :model="form" :rules="rules" ref="loginForm" label-width="80px">
+      <el-form :model="form" :rules="rules" ref="loginForm" label-width="80px" @keydown.enter="handleEnterSubmit">
         <!-- 用户名 -->
         <el-form-item label="用户名" prop="username">
           <el-input v-model="form.username" placeholder="请输入用户名" />
@@ -47,9 +48,13 @@ import { showMsgTip } from '@js/element-plus-helper.mjs';
 import RouteService from '@services/RouteService.mjs';
 import UserService from '@services/UserService.mjs';
 import { mapState } from 'vuex';
+import Settings from '@views/Header/Settings.vue';
 
 export default {
   name: 'Login',
+  components: {
+    Settings,
+  },
   data() {
     return {
       // 表单数据
@@ -89,6 +94,12 @@ export default {
         return false;
       });
     },
+    handleEnterSubmit(event) {
+      event.stopPropagation();
+      event.preventDefault();
+      if (this.form.username && this.form.password)
+        this.onLogin();
+    },
     // 跳转到注册页面
     goToRegister() {
       RouteService.navigateToLoginOrRegister('/register');
@@ -96,6 +107,11 @@ export default {
     navigateToRedirect() {
       RouteService.navigateToRedirect();
     }
+  },
+  mounted() {
+    // 自动焦点到可输入的输入框，即：不是 disabled 和 onlyread 的输入框
+    const firstInputField = this.$el && this.$el.querySelector('input:not([disabled]):not([readonly])');
+    firstInputField && firstInputField.focus();
   }
 };
 </script>
@@ -108,9 +124,19 @@ export default {
   height: 100vh;
   background-color: #f5f5f5;
 
+  /deep/ .settings-box {
+    .open-settings-btn {
+      color: #3d3b3b;
+      font-size: 22px;
+      position: absolute;
+      right: 10px;
+      top: 10px;
+    }
+  }
+
   .login-card {
     width: 400px;
-    padding: 20px;
+    padding-right: 10px;
 
     .login-title {
       text-align: center;

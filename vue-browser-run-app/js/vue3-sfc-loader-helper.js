@@ -70,7 +70,9 @@
   const loadSassFileContent = (filePath) => {
     if (!filePath) return Promise.resolve('');
     filePath = replaceAliasToPath(filePath, true); // 替换别名
-    const fileUrl = `${location.origin}${location.pathname.replace(/^\/$/, '')}/${filePath}`;
+    let pathnameDir = location.pathname.replace(/\/$/, '');
+    /\.\w+$/.test(pathnameDir) && (pathnameDir = pathnameDir.substring(0, pathnameDir.lastIndexOf('/'))); // 去掉文件名
+    const fileUrl = `${location.origin}${pathnameDir}/${filePath}`;
     delayCleanCacheSassFileContentTimer && clearTimeout(delayCleanCacheSassFileContentTimer);
     delayCleanCacheSassFileContentTimer = setTimeout(() => {
       console.log('loadSassFileContent clean cacheSassFileContent, fileUrls:', Object.keys(cacheSassFileContent));

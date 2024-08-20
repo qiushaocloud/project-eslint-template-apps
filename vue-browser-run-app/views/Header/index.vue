@@ -17,6 +17,7 @@
       <router-link to="/login">登录</router-link>
       <router-link to="/register">注册</router-link>
     </div>
+    <Settings />
 	</el-header>
 </template>
 
@@ -27,6 +28,7 @@
   import UserService from '@services/UserService.mjs';
   import RouteService from '@services/RouteService.mjs';
   import AddOrEditUserForm from './AddOrEditUserForm.vue';
+  import Settings from './Settings.vue';
 
   const store = useStore();
   const authUser = ref(store.state.user.authUser);
@@ -39,7 +41,7 @@
   }
 
   const showAddUserBox = () => {
-    showMessageBox(() => h(AddOrEditUserForm), {
+    showMessageBox(() => h(AddOrEditUserForm, {autoCloseMessageBox: true}), {
       class: 'add-user-box',
       title: '用户添加框',
       showConfirmButton: false,

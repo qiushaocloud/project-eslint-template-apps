@@ -1,7 +1,7 @@
 <template>
   <el-container class="user-manage-list-container add-vh-100" direction="vertical">
     <Header />
-    <el-main class="data-container add-important-flex-column">
+    <auth-el-main class="data-container add-important-flex-column">
       <h3>用户管理表格</h3>
       <div class="user-table-container flex-1">
         <el-auto-resizer>
@@ -16,7 +16,7 @@
           </template>
         </el-auto-resizer>
       </div>
-    </el-main>
+    </auth-el-main>
   </el-container>
 </template>
 
@@ -41,14 +41,14 @@
       width: 150,
       cellRenderer: ({ rowData }) => h('div', [
         h('el-button', { type: 'text', class: 'operation-btn edit-btn' , onClick: () => showEditUserBox(rowData.id) }, '编辑'),
-        h('el-button', { type: 'text', class: 'operation-btn del-btn', onClick: () => store.dispatch('user/delUser', rowData.id) }, '删除')
+        h('el-button', { type: 'text', class: 'operation-btn del-btn', onClick: () =>  handleDelUser(rowData.id) }, '删除')
       ])
     }
   ];
   const users = computed(() => store.state.user.users);
 
   const showEditUserBox = (updateUserId) => {
-    showMessageBox(() => h(AddOrEditUserForm, {pluginType: 'Edit', updateUserId}), {
+    showMessageBox(() => h(AddOrEditUserForm, {actionType: 'Update', updateUserId, autoCloseMessageBox: true}), {
       class: 'edit-user-box',
       title: '用户编辑框',
       showConfirmButton: false,
@@ -56,6 +56,12 @@
         width: '100%'
       }
     });
+  }
+
+  const handleDelUser = (delUserId) => {
+    showMessageBox('是否确定删除用户?').then(() => {
+      store.dispatch('user/delUser', delUserId);
+    })
   }
 </script>
 

@@ -1,7 +1,7 @@
 <template>
   <el-container class="home-container add-vh-100" direction="vertical">
     <Header />
-    <el-main class="video-container add-important-flex-column">
+    <auth-el-main class="video-container add-important-flex-column">
       <div class="search-box">
         <el-input
           v-model="videoUrlInput"
@@ -23,7 +23,7 @@
           <video class="wh-percentage-100 bg-color-black add-position-absolute" :src="videoUrl" controls autoplay loop></video>
         </div>
       </div>
-    </el-main>
+    </auth-el-main>
   </el-container>
 </template>
 

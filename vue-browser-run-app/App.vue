@@ -7,12 +7,19 @@
 
 <script>
   import './scss/global.scss';
+  import { getCurrentInstance } from 'vue';
   import { showMessageBox } from '@js/element-plus-helper.mjs';
   import { mapState } from 'vuex';
   import UserService from '@services/UserService.mjs';
   import RouteService from '@services/RouteService.mjs';
+  import AuthElMain from '@views/Auth/AuthElMain.vue';
 
   export default {
+    setup() {
+      // 在这里安装全局 组件
+      const app = getCurrentInstance().appContext.app;
+      app.component('AuthElMain', AuthElMain);
+    },
     computed: {
       ...mapState('user', ['authUser']),
     },

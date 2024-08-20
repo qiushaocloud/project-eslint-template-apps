@@ -6,18 +6,20 @@ import userModule from './modules/user.mjs';
 const {storeConfig} = createStoreConfig({
   // plugins: [createLogger()],
   state: {
-    count: 0,
+    count: 0
   },
   getters: {},
   mutations: {
     INCREMENT(state) {
       state.count++;
     },
+   
   },
   actions: {
     increment({ commit }) {
       commit('INCREMENT');
     },
+   
   },
   modules: {
     user: userModule

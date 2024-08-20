@@ -1,12 +1,11 @@
 import { createStoreModule } from '../store-helper.mjs';
 
-const EXPIRE_DURATION = 60 * 60 * 1; // 用户登陆过期时长，单位秒
+const EXPIRE_DURATION = 60 * 60 * 12; // 用户登陆过期时长，单位秒
 let userSeq = 0; // auto-increment user id
 
 const findUser = (state, idOrUsername) => state.users.find(user => typeof idOrUsername === 'number' ? user.id === idOrUsername : user.username === idOrUsername);
 const findUserIndex = (state, idOrUsername) => state.users.findIndex(user => typeof idOrUsername === 'number' ? user.id === idOrUsername : user.username === idOrUsername);
 const getUserByIndex = (state, index) => state.users[index];
-// const createNoAuthUser = () => ({id: ++userSeq, username: "Alice", nickname: "AlicePwd", age: 25, email: "alice@example.com", loginTs: Date.now(), expireDuration: EXPIRE_DURATION});
 const createNoAuthUser = () => ({id: -1, username: "", nickname: "", age: -1, email: "", loginTs: -1, expireDuration: EXPIRE_DURATION});
 
 const vueBrowserRunApp_users = localStorage.getItem('vueBrowserRunApp_users') ? JSON.parse(localStorage.getItem('vueBrowserRunApp_users')) : [
@@ -46,7 +45,6 @@ addSyncMutationAndAction('addUser', (state, payload) => {
   const {username, password, nickname, age, email} = payload;
   const user = {id: ++userSeq, username, password, nickname, age, email};
   state.users.push(user);
-  // state.users = [...state.users, user];
   localStorage.setItem('vueBrowserRunApp_users', JSON.stringify(state.users));
 });
 
@@ -55,7 +53,6 @@ addSyncMutationAndAction('delUser', (state, idOrUsername) => {
   if (userIndex === -1) return;
   const user = getUserByIndex(state, userIndex);
   state.users.splice(userIndex, 1); // remove user
-  // state.users = [...state.users]; // trigger update
   localStorage.setItem('vueBrowserRunApp_users', JSON.stringify(state.users));
   if (state.authUser.id === user.id) {
     localStorage.removeItem('vueBrowserRunApp_authUser');
@@ -71,7 +68,6 @@ addSyncMutationAndAction('updateUser', (state, payload) => {
   password !== undefined && (user.password = password);
   age !== undefined && (user.age = age);
   email !== undefined && (user.email = email);
-  // state.users = [...state.users]; // trigger update
   localStorage.setItem('vueBrowserRunApp_users', JSON.stringify(state.users));
 });
 
