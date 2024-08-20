@@ -24,7 +24,7 @@ const AboutPage: React.FC = () => {
         <br />
         这是 Blog 页面, todos: <span>{JSON.stringify(todos)}</span>
       </div>
-      <iframe src="https://www.qiushaocloud.top/archives" style={{width: '100%', height: '900px'}} ></iframe>
+      <iframe src="https://tool.lu/js/index.html" style={{width: '100%', height: '900px'}} ></iframe>
     </div>
   );
 };

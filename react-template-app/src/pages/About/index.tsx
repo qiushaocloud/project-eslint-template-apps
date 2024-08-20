@@ -26,7 +26,7 @@ const AboutPage: React.FC = () => {
         这是 About 页面, users: <span>{JSON.stringify(users)}</span>
       </div>
 
-      <iframe src="https://www.qiushaocloud.top/extras/about" width='100%' height='900px' ></iframe>
+      <iframe src="https://www.bejson.com/" width='100%' height='900px' ></iframe>
     </div>
   );
 };
