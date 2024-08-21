@@ -6,7 +6,8 @@
 * typescript-nodejs-npmjs-webpack-template-app
 * vue2-template-app
 * vue3-template-app
-* vue3-browser-run-app
+* vue3-vuex-browser-run-app
+* vue3-pinia-browser-run-app
 * react-template-app
 * typescript-browser-npmjs-template-app
 * typescript-browser-npmjs-webpack-template-app
@@ -58,10 +59,14 @@
 > * [对应 MD 文件: react-template-app/README.md](react-template-app/README.md)
 
 
-### vue3-browser-run-app
-> * 一个不需要打包，直接运行在浏览器环境的 vue3 项目模板，直接运行在 http|https 服务上，无需安装任何依赖，无需配置环境，无需安装任何插件，无需安装任何包，只需要在浏览器中打开 index.html 即可
-> * [对应 MD 文件: vue3-browser-run-app/README.md](vue3-browser-run-app/README.md)
+### vue3-vuex-browser-run-app
+> * 一个不需要打包，直接运行在浏览器环境的 vue3 + vuex + router + element-plus + virtual-scroller 项目模板，直接运行在 http|https 服务上，无需安装任何依赖，无需配置环境，无需安装任何插件，无需安装任何包，只需要在浏览器中打开 index.html 即可
+> * [对应 MD 文件: vue3-vuex-browser-run-app/README.md](vue3-vuex-browser-run-app/README.md)
 
+
+### vue3-pinia-browser-run-app
+> * 一个不需要打包，直接运行在浏览器环境的 vue3 + pinia + router + element-plus + virtual-scroller 项目模板，直接运行在 http|https 服务上，无需安装任何依赖，无需配置环境，无需安装任何插件，无需安装任何包，只需要在浏览器中打开 index.html 即可
+> * [对应 MD 文件: vue3-pinia-browser-run-app/README.md](vue3-pinia-browser-run-app/README.md)
 
 
 #### 参与贡献

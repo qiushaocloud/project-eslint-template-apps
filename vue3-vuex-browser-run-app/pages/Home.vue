@@ -1,0 +1,66 @@
+<template>
+  <el-container class="home-container add-vh-100" direction="vertical">
+    <Header />
+    <auth-el-main class="video-container add-important-flex-column">
+      <div class="search-box">
+        <el-input
+          v-model="videoUrlInput"
+          placeholder="请您输入视频地址"
+          clearable
+        >
+          <template #prepend>视频地址：</template>
+          <template #append>
+            <el-button :icon="Search" @click="handleSearch" />
+          </template>
+        </el-input>
+      </div>
+      <div class="video-box add-flex-column flex-1">
+        <div class="video-url-box add-flex align-items-center">
+          <el-icon><VideoCamera /></el-icon>当前播放地址:
+          <el-link type="primary" :href="videoUrl" target="_blank" >{{ videoUrl }}</el-link>
+        </div>
+        <div class="video-inner add-position-relative flex-1">
+          <video class="wh-percentage-100 bg-color-black add-position-absolute" :src="videoUrl" controls autoplay loop></video>
+        </div>
+        <div class="counter-test-box add-flex flex-center">
+          计数器测试 ==>
+          <span style="margin: 0 10px;">count: {{ count }}</span>
+          <span style="margin-right: 10px;">doubleCount: {{ doubleCount }}</span>
+          <el-button @click="increment">increment</el-button>
+        </div>
+      </div>
+    </auth-el-main>
+  </el-container>
+</template>
+
+<script setup>
+  import { ref, computed } from 'vue'
+  import Header from '@views/Header/index.vue';
+  import { Search } from '@element-plus/icons-vue';
+  import { useStore } from 'vuex';
+
+  const store = useStore();
+  const count = computed(() => store.state.count);
+  const doubleCount = computed(() => store.getters.doubleCount);
+  const increment = () => store.dispatch('increment');
+
+  const videoUrlInput = ref('https://st.dj63.com//2022/车载视频/20240428/0344.周华健 - 难念的经.mp4');
+  const videoUrl = ref(videoUrlInput.value);
+
+  const handleSearch = () => {
+    if (videoUrlInput.value && videoUrlInput.value === videoUrl.value) {
+      videoUrl.value = '';
+      return setTimeout(() => {
+        videoUrl.value = videoUrlInput.value;
+      }, 300);
+    }
+    videoUrl.value = videoUrlInput.value;
+  }
+</script>
+
+<style scoped lang="scss">
+.home-container {
+  height: 100vh;
+  background-color: #f0f2f5;
+}
+</style>
