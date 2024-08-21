@@ -6,6 +6,7 @@
     "@views/": "views/",
     "@helpers/": "helpers/",
     "@services/": "services/",
+    "@stores/": "stores/",
     "@libs/": "libs/",
     "@pages/": "pages/",
     "@scss/": "scss/",

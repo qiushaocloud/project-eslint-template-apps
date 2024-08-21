@@ -1,6 +1,6 @@
 const { createApp } = Vue;
 const { createRouter, createWebHashHistory } = VueRouter;
-import store from './store/index.mjs';
+import store from './stores/index.mjs';
 window.customVue3SFCLoaderStore = store; // 设置项目的 store 到 window 对象上，方便 vue3-sfc-loader 进行 moduleCache
 
 // 路由配置
