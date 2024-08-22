@@ -1,7 +1,7 @@
 <template>
 	<el-header class="header-box">
 		<div class="logo-box">
-      <el-avatar src="@assets/images/touxiang.jpg" alt="logo" />
+      <el-avatar :icon="AvatarIcon" src="@assets/images/touxiang.jpg" alt="logo" />
       <span class="user-name" v-if="authUser.username" >{{ authUser.nickname || authUser.username }}, 欢迎您！</span>
     </div>
     <ul class="nav-menus">
@@ -10,7 +10,8 @@
       <li class="menu"><router-link to="/user-manage-list">用户管理-列表</router-link></li>
     </ul>
     <div class="authed-user-box" v-if="authUser.username">
-      <el-button @click="showAddUserBox">添加用户</el-button>
+      <el-button @click="showAddUserBox"><el-icon style="padding-right: 5px;"><UserIcon /></el-icon>添加用户</el-button>
+      <el-button @click="showEditMyUserBox"><el-icon style="padding-right: 5px;"><EditIcon /></el-icon>修改我的信息</el-button>
       <el-button type="primary" link @click="userLogout" >退出登录</el-button>
     </div>
     <div class="no-auth-user-box" v-if="!authUser.username">
@@ -29,6 +30,7 @@
   import RouteService from '@services/RouteService.mjs';
   import AddOrEditUserForm from './AddOrEditUserForm.vue';
   import Settings from './Settings.vue';
+  import { Avatar as AvatarIcon, Edit as EditIcon, User as UserIcon } from '@element-plus/icons-vue';
 
   const userStore = useUserStore();
   const authUser = computed(() => userStore.authUser);
@@ -44,6 +46,17 @@
     showMessageBox(() => h(AddOrEditUserForm, {autoCloseMessageBox: true}), {
       class: 'add-user-box',
       title: '用户添加框',
+      showConfirmButton: false,
+      customStyle: {
+        width: '100%'
+      }
+    });
+  }
+
+  const showEditMyUserBox = () => {
+    showMessageBox(() => h(AddOrEditUserForm, {autoCloseMessageBox: true, actionType: 'Update', updateUserId: authUser.value.id}), {
+      class: 'edit-my-user-box',
+      title: '编辑我的信息',
       showConfirmButton: false,
       customStyle: {
         width: '100%'
