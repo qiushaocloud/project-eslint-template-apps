@@ -7,6 +7,7 @@
   * vue3-sfc-loader【必须】
   * sass.sync.min.js【使用 sass 时必须，用于 helpers/vue3-sfc-loader-helper.js 辅助解析 scss 文件】
   * pinia【必须先引入： vue-demi】
+  * pinia-plugin-persistedstate 【有需要再引入】
   * vue-router
   * element-plus
   * vue-virtual-scroller

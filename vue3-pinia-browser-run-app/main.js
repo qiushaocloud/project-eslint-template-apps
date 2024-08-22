@@ -1,6 +1,6 @@
 const { createApp } = Vue;
 const { createRouter, createWebHashHistory } = VueRouter;
-const { createPinia } = Pinia
+const { createPinia } = Pinia;
 
 // 路由配置
 const routes = [
@@ -22,7 +22,13 @@ const app = createApp({
   components: {App: window.loadSfcLoaderComponent('./App.vue')},
   template: '<App />'
 });
-app.use(createPinia()); // 使用 pinia
+
+const pinia = createPinia();
+if (window.PiniaPersistedstatePlugin) { // 如果引入了 pinia-plugin-persistedstate
+  console.log('使用 pinia-plugin-persistedstate');
+  pinia.use(window.PiniaPersistedstatePlugin.createPersistedState());
+}
+app.use(pinia); // 使用 pinia
 app.use(router);
 window.ElementPlus && app.use(window.ElementPlus);
 

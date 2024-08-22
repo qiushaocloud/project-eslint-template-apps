@@ -7,6 +7,7 @@
   * vue3-sfc-loader【必须】
   * sass.sync.min.js【使用 sass 时必须，用于 helpers/vue3-sfc-loader-helper.js 辅助解析 scss 文件】
   * vuex
+  * vuex-persistedstate【有需要再引入】
   * vue-router
   * element-plus
   * vue-virtual-scroller
