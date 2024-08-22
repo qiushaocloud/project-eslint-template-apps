@@ -36,7 +36,7 @@
 <script setup>
   import { ref } from 'vue'
   import Header from '@views/Header/index.vue';
-  import { Search } from '@element-plus/icons-vue';
+  import { VideoCamera, Search } from '@element-plus/icons-vue';
   import { useCounterStore } from '@stores/counter.mjs';
 
   const counterStore = useCounterStore();

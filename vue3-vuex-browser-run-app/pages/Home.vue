@@ -36,7 +36,7 @@
 <script setup>
   import { ref, computed } from 'vue'
   import Header from '@views/Header/index.vue';
-  import { Search } from '@element-plus/icons-vue';
+  import { VideoCamera, Search } from '@element-plus/icons-vue';
   import { useStore } from 'vuex';
 
   const store = useStore();

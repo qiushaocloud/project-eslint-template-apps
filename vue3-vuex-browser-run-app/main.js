@@ -27,10 +27,4 @@ app.use(store);
 app.use(router);
 window.ElementPlus && app.use(window.ElementPlus);
 
-if (window.ElementPlusIconsVue) {
-  for (const [key, component] of Object.entries(window.ElementPlusIconsVue)) {
-    app.component(key, component)
-  }
-}
-
 app.mount('#app');
