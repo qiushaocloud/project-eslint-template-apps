@@ -11,6 +11,7 @@
       "@libs/*": ["libs/*"],
       "@pages/*": ["pages/*"],
       "@scss/*": ["scss/*"],
+      "@webapi/*": ["webapi/*"],
       "@/*": ["*"],
     }
   }

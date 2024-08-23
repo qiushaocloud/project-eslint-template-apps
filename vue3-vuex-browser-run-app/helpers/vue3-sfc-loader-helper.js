@@ -10,6 +10,7 @@
     "@libs/": "libs/",
     "@pages/": "pages/",
     "@scss/": "scss/",
+    "@webapi/": "webapi/",
     "@/": ""
   }
 
@@ -211,7 +212,7 @@
         console.log('getFile start replaceAliasToPath url:', url);
         url = replaceAliasToPath(url, true); // 替换别名
         console.log('getFile end replaceAliasToPath url:', url);
-        if (/\.(jpeg|jpg|png|gif)(?:\?.*)?$/.test(url) && !/\?.*format_type=(binary|blob|base64)/.test(url)) return ''; // 如果是图片，则直接返回空字符串
+        if (/\.(jpg|jpeg|png|gif|bmp|webp)(?:\?.*)?$/.test(url) && !/\?.*format_type=(binary|blob|base64)/.test(url)) return ''; // 如果是图片，则直接返回空字符串
         if (/\.svg(?:\?.*)?$/.test(url) && !/\?.*format_type=content/.test(url)) return ''; // 如果是svg，则直接返回空字符串
 
         return new Promise((resolve, reject) => {
@@ -269,7 +270,7 @@
         console.log('handleModule type:', type, ' ,path:', path);
         return new Promise((resolve, reject) => {
           if (/^(scss|sass|css)$/.test(path)) return resolve(''); // vue style 设置了 lang="scss" 会导致下载 scss 文件，这里 忽略 scss/sass 请求
-          if (/^\.(jpeg|jpg|png|gif)$/.test(type)) { // 图片文件
+          if (/^\.(jpg|jpeg|png|gif|bmp|webp)$/.test(type)) { // 图片文件
             if (/\?.*format_type=binary/.test(path)) return getContentData(true).then(resolve).catch(reject); // 图片且格式化类型为二进制，则直接返回二进制数据
             if (/\?.*format_type=blob/.test(path)) { // 图片且格式化类型为 blob，则返回图片的 blobUrl
               return getContentData(true).then((binaryData) => {
