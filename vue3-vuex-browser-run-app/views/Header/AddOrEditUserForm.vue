@@ -1,5 +1,5 @@
 <template>
-  <el-form class="add-user-form-container" :model="form" :rules="rules" ref="loginForm" label-width="80px" @keydown.enter="handleEnterSubmit">
+  <el-form class="add-edit-user-form-container" :model="form" :rules="rules" ref="addEditUserForm" label-width="80px" @keydown.enter="handleEnterSubmit">
     <!-- 用户ID -->
     <el-form-item label="ID" prop="id" v-if="actionType === 'Update'">
       <el-input :model-value="updateUserId" placeholder="请输入ID" :disabled="true" readonly />
@@ -81,7 +81,7 @@ export default {
   methods: {
     ...mapActions('user', ['addUser', 'updateUser']),
     onAddUser(){
-      this.$refs.loginForm.validate((valid) => {
+      this.$refs.addEditUserForm.validate((valid) => {
         if (valid) {
           console.log('onAddUser 表单验证通过', this.form, this.actionType);
           const user = UserService.getUser(this.form.username);
@@ -102,7 +102,7 @@ export default {
       });
     },
     onUpdateUser() {
-      this.$refs.loginForm.validate((valid) => {
+      this.$refs.addEditUserForm.validate((valid) => {
         if (valid) {
           console.log('onUpdateUser 表单验证通过', this.form);
           const updatePayload = {id: this.updateUserId, ...this.form};
@@ -172,7 +172,7 @@ export default {
 </script>
 
 <style scoped>
-.add-user-form-container {
+.add-edit-user-form-container {
   width: 396px;
 }
 </style>
