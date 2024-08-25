@@ -17,7 +17,7 @@ export default {
   props: {
     option: Object,
     theme: String,
-    style: [String, Object]
+    style: Object
   },
   mounted() {
     // 监测容器大小改变
