@@ -11,6 +11,7 @@ export default {
     BaseChart
   },
   props: {
+    title: [String, Object],
     forceOption: Object,
     option: Object,
     xAxisType: String,
@@ -22,6 +23,7 @@ export default {
     chartOption() {
       if (this.forceOption) return this.forceOption;
       const newOption = deepAssign({
+        title: this.title ? (typeof this.title ==='string' ? { text: this.title } : this.title) : {},
         xAxis: {
           type: this.xAxisType || 'category',
           data: this.xAxisData || []
