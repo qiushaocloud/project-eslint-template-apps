@@ -1,8 +1,6 @@
 <template>
   <div class="chart-box" ref="chartBoxRef" :style="{width: '100%', height: '100%', ...(this.style || {})}">
-    <div>
-      <v-chart ref="chartRef" autoresize :theme="theme" :option="option" :style="{width: '100%', height: chartHeight}" v-bind="$attrs"></v-chart>
-    </div>
+    <v-chart ref="chartRef" autoresize :theme="theme" :option="option" :style="{width: '100%', height: chartHeight}" v-bind="$attrs"></v-chart>
   </div>
 </template>
 
