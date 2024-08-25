@@ -8,6 +8,7 @@
       <li class="menu"><router-link to="/">首页</router-link></li>
       <li class="menu"><router-link to="/user-manage-table">用户管理-表格</router-link></li>
       <li class="menu"><router-link to="/user-manage-list">用户管理-列表</router-link></li>
+      <li class="menu"><router-link to="/test-echarts">ECharts 测试</router-link></li>
     </ul>
     <div class="authed-user-box" v-if="authUser.username">
       <el-button @click="showAddUserBox"><el-icon style="padding-right: 5px;"><UserIcon /></el-icon>添加用户</el-button>

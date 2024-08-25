@@ -11,6 +11,7 @@
   * vue-router
   * element-plus
   * vue-virtual-scroller
+  * vue-echarts
 * 内部技术栈
   * helpers/vue3-sfc-loader-helper.js 【必须，非常重要，用于辅助 vue3-sfc-loader 解析 vue、js、scss 等文件，支持别名映射】
   * jsconfig.json 进行别名配置，方便 vscode 进行快捷跳转【别名还需要在 helpers/vue3-sfc-loader-helper.js 中进行配置】

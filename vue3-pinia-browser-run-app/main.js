@@ -10,6 +10,7 @@ const routes = [
   { path: '/register', name: 'Register', component: window.loadSfcLoaderComponent('pages/Register.vue') },
   { path: '/user-manage-table', name: 'UserManageTable', component: window.loadSfcLoaderComponent('pages/UserManageTable.vue') },
   { path: '/user-manage-list', name: 'UserManageList', component: window.loadSfcLoaderComponent('pages/UserManageList.vue') },
+  { path: '/test-echarts', name: 'TestEcharts', component: window.loadSfcLoaderComponent('pages/TestECharts.vue') }
 ];
 
 const router = createRouter({
@@ -30,6 +31,7 @@ if (window.PiniaPersistedstatePlugin) { // 如果引入了 pinia-plugin-persiste
 }
 app.use(pinia); // 使用 pinia
 app.use(router);
-window.ElementPlus && app.use(window.ElementPlus);
+window.ElementPlus && app.use(window.ElementPlus); // 使用 element-plus 组件库
+window.VueECharts && app.component('v-chart', window.VueECharts); // 注册 vue-echarts 组件，使用参考： https://echarts.apache.org/examples/zh/index.html
 
 app.mount('#app');

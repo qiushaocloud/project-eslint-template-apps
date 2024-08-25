@@ -1,7 +1,7 @@
 <template>
   <el-container class="user-manage-list-container add-vh-100" direction="vertical">
     <Header />
-    <auth-el-main class="data-container add-important-flex-column">
+    <auth-el-main class="page-main-container add-important-flex-column">
       <h3>用户管理表格</h3>
       <div class="user-table-container flex-1">
         <el-auto-resizer>

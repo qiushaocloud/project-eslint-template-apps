@@ -23,6 +23,8 @@
     window.VueVirtualScroller && (moduleCache['vue-virtual-scroller'] = window.VueVirtualScroller);
 		window.customVue3SFCLoaderVuexStore	&& (moduleCache['@vuexstore'] = window.customVue3SFCLoaderVuexStore); // 项目的 vuex store
     window.customVue3SFCLoaderRouter && (moduleCache['@router'] = window.customVue3SFCLoaderRouter); // 项目的 vue router
+    window.echarts && (moduleCache['echarts'] = window.echarts); // 项目的 echarts
+    window.VueECharts && (moduleCache['vue-echarts'] = window.VueECharts); // 项目的 vue-echarts
   }
 
   // Sass 编译函数
