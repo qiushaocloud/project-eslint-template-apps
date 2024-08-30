@@ -6,7 +6,10 @@ const plugins = [];
 // plugins.push(Vuex.createLogger()); // 不知道为什么不好使，后面再研究
 if (window.createPersistedState) { // 如果引入了持久化插件
   console.info("create persisted state to plugin");
-  plugins.push(window.createPersistedState());
+  plugins.push(window.createPersistedState({
+    key: 'browserRunApp:vuex-persistedstate',
+    paths: ['count', 'user.users', 'user.userSeq']
+  }));
 }
 
 const {storeConfig} = createStoreConfig({

@@ -40,7 +40,7 @@
   import { useCounterStore } from '@stores/counter.mjs';
 
   const counterStore = useCounterStore();
-  const videoUrlInput = ref('https://st.dj63.com//2022/车载视频/20240428/0344.周华健 - 难念的经.mp4');
+  const videoUrlInput = ref('https://cesium.com/public/SandcastleSampleData/big-buck-bunny_trailer.mp4');
   const videoUrl = ref(videoUrlInput.value);
 
   const handleSearch = () => {
