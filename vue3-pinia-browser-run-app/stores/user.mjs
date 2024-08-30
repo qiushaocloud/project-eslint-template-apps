@@ -67,5 +67,13 @@ export const useUserStore = defineStore('user', () => {
     localStorage.setItem('vueBrowserRunApp_users', JSON.stringify(users.value));
   };
 
-  return { users, authUser, authUserNickname, userCount, setAuthUser, addUser, delUser, updateUser };
+  return {
+    users, authUser, authUserNickname, userCount,
+    setAuthUser, addUser, delUser, updateUser
+  };
+}, {
+  persist: {
+    key: 'vueBrowserRunApp:pinia-user',
+    paths: ['users']
+  }, // 启用持久化
 });

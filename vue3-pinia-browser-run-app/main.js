@@ -1,6 +1,7 @@
 const { createApp } = Vue;
 const { createRouter, createWebHashHistory } = VueRouter;
 const { createPinia } = Pinia;
+import piniaPluginPersistedstate from './libs/pinia@2.2.2/pinia-plugin-persistedstate@3.2.3.mjs';
 
 // 路由配置
 const routes = [
@@ -25,10 +26,7 @@ const app = createApp({
 });
 
 const pinia = createPinia();
-if (window.PiniaPersistedstatePlugin) { // 如果引入了 pinia-plugin-persistedstate
-  console.log('使用 pinia-plugin-persistedstate');
-  pinia.use(window.PiniaPersistedstatePlugin.createPersistedState());
-}
+pinia.use(piniaPluginPersistedstate); // 使用 pinia-plugin-persistedstate 插件，将 store 中的数据持久化到 localStorage 中
 app.use(pinia); // 使用 pinia
 app.use(router);
 window.ElementPlus && app.use(window.ElementPlus); // 使用 element-plus 组件库
