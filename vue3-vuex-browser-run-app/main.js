@@ -26,7 +26,7 @@ const app = createApp({
 });
 app.use(store); 
 app.use(router);
-window.ElementPlus && app.use(window.ElementPlus); // 使用 element-plus 组件库
+window.ElementPlus && app.use(window.ElementPlus, window.ElementPlusLocaleZhCn ? { locale: window.ElementPlusLocaleZhCn } : undefined); // 使用 element-plus 组件库
 window.VueECharts && app.component('v-chart', window.VueECharts); // 注册 vue-echarts 组件，使用参考： https://echarts.apache.org/examples/zh/index.html
 
 app.mount('#app');
